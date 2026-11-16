@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Website UMKM – Jasa Pembuatan Website untuk UMKM</title>
+<meta name="description" content="Website UMKM: jasa pembuatan website untuk usaha kecil. Tampil rapi di HP, pesanan langsung ke WhatsApp. Bisa ditambah dasbor AI dan otomatisasi AI.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://website-umkm.vercel.app/">
+<meta property="og:site_name" content="Website UMKM">
+<meta property="og:title" content="Website UMKM – Website yang bikin usaha Anda dipercaya">
+<meta property="og:description" content="Jasa pembuatan website untuk UMKM. Tampil rapi di HP, pesanan langsung ke WhatsApp. Lihat demonya dulu, baru online.">
+<meta property="og:image" content="https://website-umkm.vercel.app/img/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%2322c55e'/%3E%3Ctext x='32' y='44' font-family='Arial' font-weight='900' font-size='34' text-anchor='middle' fill='%2304210f'%3EW%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Instrument+Serif:ital@1&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#060a12;--bg2:#0b1120;--card:#0f1626;--card2:#131c30;--line:#1d2740;--line2:#2a3654;
+--acc:#22c55e;--acc2:#86efac;--blue:#5b8cff;--txt:#fff;--mut:#93a0b8;--mut2:#5f6b85}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--txt);font-family:Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img{max-width:100%;display:block}a{color:inherit;text-decoration:none}
+button,input,select,textarea{font:inherit;color:inherit}
+.wrap{max-width:1240px;margin:0 auto;padding:0 24px;position:relative;z-index:2}
+section{position:relative;padding:110px 0;overflow:hidden}
+.serif{font-family:'Instrument Serif',Georgia,serif;font-style:italic;font-weight:400;letter-spacing:0}
+.kick{display:inline-flex;align-items:center;gap:10px;font-size:12px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--acc)}
+.kick::before{content:"";width:22px;height:2px;background:var(--acc);border-radius:2px}
+.h2{font-size:clamp(34px,4.6vw,58px);font-weight:700;letter-spacing:-1.6px;line-height:1.05;margin-top:16px}
+.h2 .serif{color:var(--acc2);font-size:1.08em}
+.lead{color:var(--mut);font-size:17px;line-height:1.65;margin-top:18px;max-width:620px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;height:54px;padding:0 28px;border-radius:999px;font-weight:700;font-size:15px;transition:transform .25s,box-shadow .25s,background .25s;cursor:pointer;border:0}
+.btn-acc{background:var(--acc);color:#04210f;box-shadow:0 10px 30px -10px rgba(34,197,94,.7)}
+.btn-acc:hover{transform:translateY(-2px);box-shadow:0 16px 40px -10px rgba(34,197,94,.9)}
+.btn-ghost{border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.04);backdrop-filter:blur(8px)}
+.btn-ghost:hover{background:rgba(255,255,255,.09)}
+.btn-ghost b{background:rgba(255,255,255,.1);border-radius:999px;padding:2px 9px;font-size:13px}
+.ico{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .8s ease,transform .8s ease}
+.reveal.in{opacity:1;transform:none}
+.d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}
+
+/* NAV */
+nav.top{position:fixed;top:14px;left:50%;transform:translateX(-50%);width:min(1200px,calc(100% - 28px));z-index:80;display:flex;align-items:center;justify-content:space-between;padding:10px 10px 10px 20px;border-radius:999px;background:rgba(8,12,22,.6);border:1px solid rgba(255,255,255,.08);backdrop-filter:blur(16px);transition:background .3s}
+nav.top.scrolled{background:rgba(8,12,22,.88)}
+.logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:17px;letter-spacing:-.3px}
+.logo i{width:34px;height:34px;border-radius:11px;background:linear-gradient(135deg,var(--acc),#0ea5e9);display:grid;place-items:center;font-style:normal;color:#04210f;font-weight:900;font-size:15px}
+.logo small{display:block;font-size:10px;font-weight:600;color:var(--mut);letter-spacing:.5px;margin-top:1px}
+.navl{display:none;gap:30px;font-size:14px;color:rgba(255,255,255,.65);font-weight:500}
+.navl a:hover{color:#fff}
+@media(min-width:960px){.navl{display:flex}}
+nav.top .btn{height:44px;padding:0 20px;font-size:14px}
+
+/* HERO */
+.hero{min-height:100vh;padding:150px 0 70px;display:flex;flex-direction:column;justify-content:center}
+.collage{position:absolute;inset:0;z-index:0;overflow:hidden;pointer-events:none}
+.collage .shot{position:absolute;border-radius:16px;overflow:hidden;border:1px solid rgba(255,255,255,.1);box-shadow:0 30px 80px rgba(0,0,0,.6);opacity:.55}
+.collage .shot img{width:100%;height:100%;object-fit:cover;object-position:top}
+.s1{width:520px;height:325px;right:-60px;top:110px;transform:rotate(-6deg);animation:fl1 14s ease-in-out infinite}
+.s2{width:400px;height:255px;right:330px;top:-40px;transform:rotate(5deg);animation:fl2 16s ease-in-out infinite}
+.s3{width:430px;height:272px;right:120px;bottom:40px;transform:rotate(4deg);animation:fl1 18s ease-in-out infinite reverse}
+.s4{width:190px;height:410px;right:540px;bottom:-60px;transform:rotate(-8deg);animation:fl2 15s ease-in-out infinite}
+.s5{width:360px;height:225px;left:-80px;bottom:-30px;transform:rotate(-4deg);animation:fl1 17s ease-in-out infinite}
+@keyframes fl1{50%{translate:0 -18px}}@keyframes fl2{50%{translate:0 16px}}
+.collage::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,var(--bg) 18%,rgba(6,10,18,.82) 48%,rgba(6,10,18,.35)),linear-gradient(0deg,var(--bg),transparent 35%)}
+@media(max-width:900px){.s1{right:-200px;top:90px}.s2,.s4{display:none}.s3{right:-120px}.collage::after{background:linear-gradient(0deg,var(--bg) 10%,rgba(6,10,18,.88) 60%,rgba(6,10,18,.6))}}
+.glowg{position:absolute;width:620px;height:620px;border-radius:50%;background:rgba(34,197,94,.14);filter:blur(130px);left:-200px;top:-120px;z-index:0}
+.badge{display:inline-flex;align-items:center;gap:10px;padding:6px 14px 6px 8px;border-radius:999px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.05);backdrop-filter:blur(8px);font-size:13px;color:rgba(255,255,255,.75)}
+.badge .dot{width:8px;height:8px;border-radius:50%;background:var(--acc);box-shadow:0 0 0 4px rgba(34,197,94,.2);animation:pl 1.8s infinite}
+@keyframes pl{50%{box-shadow:0 0 0 8px rgba(34,197,94,0)}}
+.badge b{background:rgba(34,197,94,.15);color:var(--acc2);padding:3px 10px;border-radius:999px;font-weight:600}
+.hero h1{font-size:clamp(46px,7vw,92px);font-weight:700;letter-spacing:-3px;line-height:.98;margin-top:28px;max-width:820px}
+.hero h1 .serif{color:var(--acc2);font-size:1.1em;letter-spacing:-1px}
+.hero p.sub{font-size:clamp(16px,1.6vw,19px);color:rgba(255,255,255,.7);line-height:1.65;max-width:600px;margin-top:26px}
+.ctas{display:flex;flex-wrap:wrap;gap:14px;margin-top:36px}
+.facts{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:64px;max-width:900px}
+@media(min-width:800px){.facts{grid-template-columns:repeat(4,1fr)}}
+.fact{padding:18px 20px;border-radius:18px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);backdrop-filter:blur(10px)}
+.fact b{display:block;font-size:30px;font-weight:800;letter-spacing:-1px}
+.fact b em{font-style:normal;color:var(--acc2)}
+.fact span{font-size:13px;color:var(--mut);line-height:1.45;display:block;margin-top:4px}
+
+/* MARQUEE */
+.marq2{border-top:0}
+.marq{border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:#080d18;padding:20px 0;overflow:hidden;position:relative;z-index:2}
+.mtrack{display:flex;gap:44px;width:max-content;animation:mq 38s linear infinite}
+.mtrack span{display:flex;align-items:center;gap:12px;font-size:18px;font-weight:600;color:rgba(255,255,255,.55);white-space:nowrap}
+.mtrack span::before{content:"✦";color:var(--acc);font-size:14px}
+@keyframes mq{to{transform:translateX(-50%)}}
+
+/* PORTFOLIO */
+.phead{display:flex;flex-wrap:wrap;gap:28px;align-items:flex-end;justify-content:space-between}
+.filters{display:flex;flex-wrap:wrap;gap:8px;margin-top:44px}
+.filters button{border:1px solid var(--line2);background:transparent;padding:10px 18px;border-radius:999px;font-size:14px;font-weight:600;color:var(--mut);cursor:pointer;transition:.25s;display:flex;align-items:center;gap:8px}
+.filters button em{font-style:normal;font-size:12px;color:var(--mut2)}
+.filters button.on,.filters button:hover{background:#fff;color:#0a0f1c;border-color:#fff}
+.filters button.on em{color:#55607a}
+.pgrid{display:grid;grid-template-columns:1fr;gap:22px;margin-top:28px}
+@media(min-width:760px){.pgrid{grid-template-columns:repeat(2,1fr)}}
+.pc{background:var(--card);border:1px solid var(--line);border-radius:24px;overflow:hidden;display:flex;flex-direction:column;transition:transform .45s,border-color .45s,opacity .35s}
+.pc:hover{transform:translateY(-6px);border-color:rgba(34,197,94,.5)}
+.pc.hide{display:none}
+.pimg{position:relative;aspect-ratio:16/10;overflow:hidden;background:#0a0f1c}
+.pimg img{width:100%;height:100%;object-fit:cover;object-position:top;transition:transform 1.2s cubic-bezier(.2,.7,.2,1)}
+.pc:hover .pimg img{transform:scale(1.05)}
+.status{position:absolute;top:16px;left:16px;display:inline-flex;align-items:center;gap:7px;padding:6px 12px;border-radius:999px;font-size:12px;font-weight:700;background:rgba(6,10,18,.75);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.12)}
+.status i{width:7px;height:7px;border-radius:50%;background:var(--acc)}
+.pbody{padding:24px 26px 26px;display:flex;flex-direction:column;gap:12px;flex:1}
+.ptop{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}
+.pbody h3{font-size:24px;font-weight:700;letter-spacing:-.5px}
+.pbody .sub{font-size:14px;color:var(--mut);margin-top:3px}
+.arrow{width:46px;height:46px;border-radius:50%;border:1px solid var(--line2);display:grid;place-items:center;flex-shrink:0;transition:.3s}
+.pc:hover .arrow{background:var(--acc);color:#04210f;border-color:var(--acc);transform:rotate(-45deg)}
+.tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:auto;padding-top:6px}
+.tags span{font-size:12px;font-weight:600;padding:6px 11px;border-radius:8px;background:#0a1020;border:1px solid var(--line);color:#b9c3d6}
+.pc.next{border-style:dashed;border-color:var(--line2);background:linear-gradient(135deg,rgba(34,197,94,.08),transparent 60%);justify-content:center;align-items:flex-start;padding:40px;gap:16px;min-height:360px}
+.pc.next h3{font-size:clamp(28px,3vw,38px);font-weight:700;letter-spacing:-1px;line-height:1.1}
+.pc.next p{color:var(--mut);line-height:1.6}
+
+/* LAYANAN */
+.lay{display:grid;grid-template-columns:1fr;gap:22px;margin-top:56px}
+@media(min-width:980px){.lay{grid-template-columns:1.25fr 1fr}}
+.main{position:relative;border-radius:28px;padding:40px;background:radial-gradient(120% 80% at 100% 0%,rgba(34,197,94,.22),transparent 55%),linear-gradient(160deg,#0f1a2e,#0b1222);border:1px solid rgba(34,197,94,.35);overflow:hidden}
+.main .lbl{display:inline-flex;gap:8px;align-items:center;background:var(--acc);color:#04210f;font-size:12px;font-weight:800;letter-spacing:1px;padding:6px 12px;border-radius:999px;text-transform:uppercase}
+.main h3{font-size:clamp(32px,3.4vw,44px);font-weight:800;letter-spacing:-1.5px;margin-top:20px;line-height:1.05}
+.main>p{color:#c2cbdc;font-size:16px;line-height:1.65;margin-top:14px;max-width:520px}
+.feat{display:grid;grid-template-columns:1fr;gap:12px;margin-top:28px}
+@media(min-width:560px){.feat{grid-template-columns:1fr 1fr}}
+.feat div{display:flex;gap:12px;align-items:flex-start;padding:14px 16px;border-radius:14px;background:rgba(6,10,18,.45);border:1px solid rgba(255,255,255,.07);font-size:14px;font-weight:600;line-height:1.4}
+.feat svg{color:var(--acc);margin-top:1px}
+.phone{position:absolute;right:-30px;bottom:-60px;width:210px;border-radius:30px;border:6px solid #1c2538;overflow:hidden;transform:rotate(-8deg);box-shadow:0 30px 60px rgba(0,0,0,.6);display:none}
+@media(min-width:1180px){.phone{display:block}.main{padding-right:230px}}
+.main .btn{margin-top:30px}
+.extras{display:flex;flex-direction:column;gap:16px}
+.extras .head{padding:6px 4px 4px}
+.extras .head b{font-size:13px;letter-spacing:2px;text-transform:uppercase;color:var(--blue)}
+.extras .head p{color:var(--mut);font-size:15px;margin-top:6px;line-height:1.55}
+.ex{display:flex;gap:18px;padding:22px;border-radius:22px;background:var(--card);border:1px solid var(--line);transition:.35s}
+.ex:hover{border-color:rgba(91,140,255,.55);transform:translateX(4px)}
+.ex .ei{width:52px;height:52px;border-radius:15px;display:grid;place-items:center;flex-shrink:0;background:rgba(91,140,255,.12);color:var(--blue);border:1px solid rgba(91,140,255,.3)}
+.ex h4{font-size:18px;font-weight:700;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.ex h4 em{font-style:normal;font-size:10px;font-weight:800;letter-spacing:1px;padding:3px 8px;border-radius:999px;background:rgba(91,140,255,.15);color:#a9c1ff}
+.ex p{font-size:14px;color:var(--mut);line-height:1.55;margin-top:6px}
+
+/* DASH MOCK */
+.dashrow{display:grid;grid-template-columns:1fr;gap:40px;align-items:center;margin-top:90px}
+@media(min-width:980px){.dashrow{grid-template-columns:1fr 1.1fr;gap:70px}}
+.dash{border-radius:24px;background:#0b1222;border:1px solid var(--line2);padding:22px;box-shadow:0 40px 100px -30px rgba(91,140,255,.35);position:relative}
+.dash .dtop{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}
+.dash .dtop b{font-size:15px}
+.dash .dtop span{font-size:11px;font-weight:700;color:var(--mut);border:1px solid var(--line2);padding:4px 9px;border-radius:999px}
+.kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.kpi{background:#0f1730;border:1px solid var(--line);border-radius:14px;padding:14px}
+.kpi small{font-size:11px;color:var(--mut)}.kpi b{display:block;font-size:20px;font-weight:800;margin-top:6px}
+.kpi em{font-style:normal;font-size:11px;font-weight:700;color:var(--acc)}
+.bars{display:flex;align-items:flex-end;gap:8px;height:140px;margin-top:16px;padding:14px;background:#0f1730;border:1px solid var(--line);border-radius:14px}
+.bars i{flex:1;border-radius:6px 6px 2px 2px;background:linear-gradient(0deg,rgba(91,140,255,.35),rgba(91,140,255,.8));height:0;transition:height 1.2s cubic-bezier(.2,.7,.2,1)}
+.bars i.top{background:linear-gradient(0deg,rgba(34,197,94,.5),var(--acc));box-shadow:0 0 20px rgba(34,197,94,.5)}
+.dash.in .bars i{height:var(--h)}
+.botmsg{position:absolute;right:-14px;bottom:-30px;width:min(290px,80%);background:#13203a;border:1px solid var(--line2);border-radius:18px;padding:14px;box-shadow:0 20px 50px rgba(0,0,0,.5)}
+.botmsg .bh{display:flex;align-items:center;gap:8px;font-size:12px;font-weight:700;color:var(--acc2);margin-bottom:8px}
+.botmsg p{font-size:13px;line-height:1.5;color:#dbe3f0}
+.mock-note{font-size:12px;color:var(--mut2);margin-top:44px}
+
+/* PROSES */
+.steps{display:grid;grid-template-columns:1fr;gap:18px;margin-top:56px}
+@media(min-width:700px){.steps{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:1100px){.steps{grid-template-columns:repeat(4,1fr)}}
+.st{position:relative;padding:30px 26px;border-radius:22px;background:var(--card);border:1px solid var(--line);overflow:hidden}
+.st .n{font-size:64px;font-weight:900;letter-spacing:-3px;line-height:1;background:linear-gradient(180deg,rgba(255,255,255,.22),rgba(255,255,255,0));-webkit-background-clip:text;background-clip:text;color:transparent}
+.st h4{font-size:20px;font-weight:700;margin-top:16px}
+.st p{font-size:14px;color:var(--mut);line-height:1.6;margin-top:8px}
+.st .tag{display:inline-block;margin-top:18px;font-size:11px;font-weight:800;letter-spacing:1.5px;color:var(--acc);text-transform:uppercase}
+.st::after{content:"";position:absolute;left:0;right:0;top:0;height:2px;background:linear-gradient(90deg,var(--acc),transparent);transform:scaleX(0);transform-origin:left;transition:transform .6s}
+.st:hover::after{transform:scaleX(1)}
+
+/* FAQ */
+.faqw{display:grid;grid-template-columns:1fr;gap:40px}
+@media(min-width:980px){.faqw{grid-template-columns:.8fr 1.2fr;gap:70px}}
+.qa{border-bottom:1px solid var(--line)}
+.qa button{width:100%;background:none;border:0;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:20px;padding:24px 0;text-align:left;font-size:18px;font-weight:600}
+.qa .pm{width:34px;height:34px;border-radius:50%;border:1px solid var(--line2);display:grid;place-items:center;flex-shrink:0;transition:.35s}
+.qa.open .pm{transform:rotate(45deg);background:var(--acc);color:#04210f;border-color:var(--acc)}
+.qa .ans{display:grid;grid-template-rows:0fr;transition:grid-template-rows .45s}
+.qa.open .ans{grid-template-rows:1fr}
+.qa .ans>div{overflow:hidden}
+.qa .ans p{padding:0 50px 24px 0;color:var(--mut);line-height:1.75;font-size:15px}
+
+/* KONTAK */
+.kontak{display:grid;grid-template-columns:1fr;gap:40px;padding:44px;border-radius:32px;background:radial-gradient(80% 100% at 0% 0%,rgba(34,197,94,.18),transparent 60%),#0c1426;border:1px solid var(--line2)}
+@media(min-width:980px){.kontak{grid-template-columns:1fr 1fr;padding:60px}}
+.wa-card{display:flex;align-items:center;gap:16px;margin-top:30px;padding:18px 20px;border-radius:18px;background:rgba(6,10,18,.5);border:1px solid var(--line2);transition:.3s;max-width:420px}
+.wa-card:hover{border-color:var(--acc)}
+.wa-card .wi{width:48px;height:48px;border-radius:14px;background:#25d366;display:grid;place-items:center;color:#fff}
+.wa-card b{display:block;font-size:17px}.wa-card small{color:var(--mut);font-size:13px}
+form{display:grid;gap:14px}
+.f2{display:grid;gap:14px}@media(min-width:560px){.f2{grid-template-columns:1fr 1fr}}
+label{display:grid;gap:7px;font-size:13px;font-weight:600;color:#c2cbdc}
+input,select,textarea{width:100%;background:#070c18;border:1px solid var(--line2);border-radius:12px;padding:13px 14px;font-size:15px;outline:none;transition:border-color .2s}
+input:focus,select:focus,textarea:focus{border-color:var(--acc)}
+textarea{min-height:100px;resize:vertical}
+.chk{display:flex;flex-wrap:wrap;gap:8px}
+.chk label{display:flex;align-items:center;gap:8px;padding:10px 14px;border-radius:999px;border:1px solid var(--line2);cursor:pointer;font-size:14px;color:#dbe3f0;transition:.2s}
+.chk input{width:auto;accent-color:var(--acc)}
+.chk label:has(input:checked){border-color:var(--acc);background:rgba(34,197,94,.1)}
+form .btn{width:100%;margin-top:6px}
+
+/* FOOTER */
+footer{border-top:1px solid var(--line);padding:70px 0 0;position:relative;overflow:hidden}
+.fg{display:grid;grid-template-columns:1fr 1fr;gap:36px}
+@media(min-width:900px){.fg{grid-template-columns:1.6fr 1fr 1fr 1fr}}
+.fg h5{font-size:14px;font-weight:700;margin-bottom:16px}
+.fg li{list-style:none;font-size:14px;color:var(--mut);line-height:2.2}
+.fg li a:hover{color:#fff}
+.fg .about{color:var(--mut);font-size:14px;line-height:1.7;margin-top:16px;max-width:320px}
+.fbot{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px;margin-top:56px;padding:22px 0;border-top:1px solid var(--line);font-size:13px;color:var(--mut2)}
+.huge{font-size:clamp(64px,15vw,230px);font-weight:900;letter-spacing:-.06em;line-height:.8;text-align:center;margin-top:20px;background:linear-gradient(180deg,rgba(255,255,255,.14),rgba(255,255,255,0) 85%);-webkit-background-clip:text;background-clip:text;color:transparent;white-space:nowrap;user-select:none}
+@media(max-width:560px){.logo small{display:none}nav.top .btn{height:40px;padding:0 14px;font-size:13px}.badge{font-size:12px}.badge>span:last-child{display:none}.hero h1{letter-spacing:-2px}}
+
+/* extra polish */
+.progress{position:fixed;left:0;top:0;height:3px;width:0;background:linear-gradient(90deg,var(--acc),#0ea5e9);z-index:100;box-shadow:0 0 12px rgba(34,197,94,.7)}
+.spot{position:absolute;inset:0;z-index:1;pointer-events:none;background:radial-gradient(500px circle at var(--mx,30%) var(--my,40%),rgba(34,197,94,.13),transparent 60%);transition:background .1s}
+.hero h1 .serif{background:linear-gradient(90deg,#86efac,#22c55e,#5eead4,#86efac);background-size:300% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:shim 6s linear infinite;padding-right:.08em}
+@keyframes shim{to{background-position:300% 0}}
+.pc{transform-style:preserve-3d;will-change:transform}
+.pc .pimg::after{content:"";position:absolute;inset:0;background:radial-gradient(400px circle at var(--gx,50%) var(--gy,50%),rgba(255,255,255,.18),transparent 45%);opacity:0;transition:opacity .3s;pointer-events:none}
+.pc:hover .pimg::after{opacity:1}
+.btn-acc{position:relative;overflow:hidden}
+.btn-acc::after{content:"";position:absolute;top:0;left:-60%;width:40%;height:100%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.55),transparent);transform:skewX(-20deg);animation:sheen 4.5s ease-in-out infinite}
+@keyframes sheen{0%,70%{left:-60%}100%{left:130%}}
+.marq2 .mtrack{animation-direction:reverse;animation-duration:46s}
+.marq2 .mtrack span{color:rgba(255,255,255,.35);font-size:15px}
+.marq2 .mtrack span::before{content:"●";color:#5b8cff;font-size:8px}
+.fwa{position:fixed;right:20px;bottom:20px;width:58px;height:58px;border-radius:50%;background:#25d366;display:grid;place-items:center;z-index:90;box-shadow:0 12px 30px rgba(0,0,0,.45);transition:transform .3s}
+.fwa:hover{transform:scale(1.08)}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}.dash .bars i{height:var(--h)}}
+</style>
+</head>
+<body>
+<div class="progress" id="prog"></div>
+
+<nav class="top" id="nav">
+  <a href="#" class="logo"><i>W</i><span>Website UMKM<small>oleh Aditiya Firmansyah</small></span></a>
+  <div class="navl"><a href="#karya">Karya</a><a href="#layanan">Layanan</a><a href="#ai">Dasbor &amp; AI</a><a href="#proses">Proses</a><a href="#faq">FAQ</a></div>
+  <a class="btn btn-acc" href="#kontak">Konsultasi gratis</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="collage" aria-hidden="true">
+    <div class="shot s2"><img src="img/ngaji.jpg" alt=""></div>
+    <div class="shot s1"><img src="img/dimsum-web.jpg" alt=""></div>
+    <div class="shot s4"><img src="img/bardi-m.jpg" alt=""></div>
+    <div class="shot s3"><img src="img/bardi.jpg" alt=""></div>
+    <div class="shot s5"><img src="img/juragan.jpg" alt=""></div>
+  </div>
+  <div class="glowg"></div>
+  <div class="spot" id="spot"></div>
+  <div class="wrap">
+    <span class="badge reveal"><span class="dot"></span><b>Menerima proyek</b><span>Konsultasi gratis via WhatsApp</span></span>
+    <h1 class="reveal d1">Website yang bikin usaha Anda <span class="serif">dipercaya.</span></h1>
+    <p class="sub reveal d2">Website untuk UMKM yang tampil rapi di HP, pesanan langsung masuk WhatsApp, dan siap dibagikan ke pelanggan. Lihat demonya dulu sebelum online.</p>
+    <div class="ctas reveal d3">
+      <a class="btn btn-acc" href="#kontak">Konsultasi gratis <svg class="ico" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      <a class="btn btn-ghost" href="#karya">Lihat <b>5</b> karya</a>
+    </div>
+    <div class="facts reveal d3">
+      <div class="fact"><b><em class="count" data-to="5">0</em></b><span>Karya sudah online &amp; dipakai</span></div>
+      <div class="fact"><b>HP</b><span>Tampil rapi di layar ponsel</span></div>
+      <div class="fact"><b>WA</b><span>Pesanan langsung ke WhatsApp</span></div>
+      <div class="fact"><b>+<em>AI</em></b><span>Bisa ditambah dasbor &amp; otomatisasi</span></div>
+    </div>
+  </div>
+</section>
+
+<div class="marq" aria-hidden="true"><div class="mtrack" id="mtrack">
+  <span>Warung makan</span><span>Kafe &amp; kedai kopi</span><span>Katering</span><span>Frozen food</span><span>Toko kelontong</span><span>Biro jasa</span><span>Laundry</span><span>Bengkel</span><span>Salon &amp; barbershop</span><span>Bimbel &amp; kursus</span><span>Toko online</span>
+</div></div>
+
+<div class="marq marq2" aria-hidden="true"><div class="mtrack" id="mtrack2">
+  <span>Website profil usaha</span><span>Menu &amp; katalog online</span><span>Tombol pesan WhatsApp</span><span>Dasbor penjualan</span><span>Chatbot WA 24 jam</span><span>Laporan otomatis Telegram</span><span>Aplikasi kasir</span>
+</div></div>
+
+<!-- KARYA -->
+<section id="karya">
+  <div class="wrap">
+    <div class="phead">
+      <div class="reveal">
+        <span class="kick">Portofolio</span>
+        <h2 class="h2">Karya yang sudah <span class="serif">online.</span></h2>
+        <p class="lead">Website dan aplikasi yang dibangun untuk usaha sungguhan. Klik karya untuk membukanya langsung.</p>
+      </div>
+    </div>
+    <div class="filters reveal" role="tablist">
+      <button class="on" data-f="all">Semua <em>5</em></button>
+      <button data-f="web">Website <em>4</em></button>
+      <button data-f="app">Aplikasi <em>1</em></button>
+      <button data-f="ai">Otomasi AI <em>1</em></button>
+    </div>
+    <div class="pgrid">
+      <a class="pc reveal" data-c="web" href="https://dimsum-enaqo.vercel.app" target="_blank" rel="noopener">
+        <div class="pimg"><img src="img/dimsum-web.jpg" alt="Website Dimsum Enaqo"><span class="status"><i></i>Online · Terbaru</span></div>
+        <div class="pbody">
+          <div class="ptop"><div><h3>Dimsum Enaqo</h3><p class="sub">Website kuliner · Dimsum &amp; mentai Cirebon</p></div><span class="arrow"><svg class="ico" viewBox="0 0 24 24"><path d="M7 17 17 7M8 7h9v9"/></svg></span></div>
+          <div class="tags"><span>Website menu</span><span>Pesan Sekarang</span><span>Tanya via WA</span><span>Animasi gulir</span></div>
+        </div>
+      </a>
+      <a class="pc reveal d1" data-c="web" href="https://solusi-ngaji-web.vercel.app" target="_blank" rel="noopener">
+        <div class="pimg"><img src="img/ngaji.jpg" alt="Website Solusi Ngaji"><span class="status"><i></i>Online · Terbaru</span></div>
+        <div class="pbody">
+          <div class="ptop"><div><h3>Solusi Ngaji</h3><p class="sub">Website kelas ngaji online · pendidikan</p></div><span class="arrow"><svg class="ico" viewBox="0 0 24 24"><path d="M7 17 17 7M8 7h9v9"/></svg></span></div>
+          <div class="tags"><span>Landing page</span><span>Daftar kelas gratis</span><span>Info biaya</span><span>FAQ</span></div>
+        </div>
+      </a>
+      <a class="pc reveal" data-c="web" href="https://bardi-jasa.vercel.app" target="_blank" rel="noopener">
+        <div class="pimg"><img src="img/bardi.jpg" alt="Website Bardi Jasa"><span class="status"><i></i>Online</span></div>
+        <div class="pbody">
+          <div class="ptop"><div><h3>Bardi Jasa</h3><p class="sub">Website biro jasa dokumen · Jabodetabek</p></div><span class="arrow"><svg class="ico" viewBox="0 0 24 24"><path d="M7 17 17 7M8 7h9v9"/></svg></span></div>
+          <div class="tags"><span>Landing page</span><span>Tombol WhatsApp</span><span>Galeri testimoni</span><span>Tampil di HP</span></div>
+        </div>
+      </a>
+      <a class="pc reveal d1" data-c="web ai" href="https://juragan-ai.vercel.app" target="_blank" rel="noopener">
+        <div class="pimg"><img src="img/juragan.jpg" alt="Website Juragan AI"><span class="status"><i></i>Online</span></div>
+        <div class="pbody">
+          <div class="ptop"><div><h3>Juragan AI</h3><p class="sub">Landing page chatbot WhatsApp untuk kuliner</p></div><span class="arrow"><svg class="ico" viewBox="0 0 24 24"><path d="M7 17 17 7M8 7h9v9"/></svg></span></div>
+          <div class="tags"><span>Landing page</span><span>Chatbot WA</span><span>Otomasi AI</span></div>
+        </div>
+      </a>
+      <div class="pc reveal" data-c="app">
+        <div class="pimg"><img src="img/dimsum-kasir.jpg" alt="Aplikasi kasir Dimsum Enaqo"><span class="status"><i></i>Dipakai klien</span></div>
+        <div class="pbody">
+          <div class="ptop"><div><h3>Kasir Dimsum Enaqo</h3><p class="sub">Aplikasi kasir UMKM kuliner</p></div><span class="arrow" title="Aplikasi internal klien"><svg class="ico" viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg></span></div>
+          <div class="tags"><span>Aplikasi kasir</span><span>Login karyawan</span><span>Sesuai warna logo</span></div>
+        </div>
+      </div>
+      <a class="pc next reveal d1" data-c="web app ai" href="#kontak">
+        <span class="kick">Slot berikutnya</span>
+        <h3>Usaha Anda bisa jadi <span class="serif" style="color:var(--acc2)">karya berikutnya.</span></h3>
+        <p>Ceritakan usaha Anda, kami buatkan demo websitenya dulu. Kalau cocok, baru online.</p>
+        <span class="btn btn-acc" style="margin-top:8px">Mulai konsultasi →</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- LAYANAN -->
+<section id="layanan" style="background:linear-gradient(180deg,transparent,#080d19 30%,#080d19 70%,transparent)">
+  <div class="wrap">
+    <div class="reveal">
+      <span class="kick">Layanan</span>
+      <h2 class="h2">Fokus kami: <span class="serif">website UMKM.</span></h2>
+      <p class="lead">Satu website yang rapi sudah cukup membuat pelanggan percaya. Kalau usaha makin ramai, tinggal tambah dasbor dan otomatisasi AI.</p>
+    </div>
+    <div class="lay">
+      <div class="main reveal">
+        <span class="lbl">★ Layanan utama</span>
+        <h3>Pembuatan Website UMKM</h3>
+        <p>Website profil usaha, menu, atau katalog produk yang desainnya dibuat khusus sesuai brand Anda.</p>
+        <div class="feat">
+          <div><svg class="ico" viewBox="0 0 24 24"><path d="m5 12 5 5 9-10"/></svg>Desain sesuai logo &amp; warna usaha</div>
+          <div><svg class="ico" viewBox="0 0 24 24"><path d="m5 12 5 5 9-10"/></svg>Tampil rapi di HP</div>
+          <div><svg class="ico" viewBox="0 0 24 24"><path d="m5 12 5 5 9-10"/></svg>Tombol pesan WhatsApp</div>
+          <div><svg class="ico" viewBox="0 0 24 24"><path d="m5 12 5 5 9-10"/></svg>Menu, katalog &amp; testimoni</div>
+          <div><svg class="ico" viewBox="0 0 24 24"><path d="m5 12 5 5 9-10"/></svg>Link siap dibagikan ke status &amp; bio</div>
+          <div><svg class="ico" viewBox="0 0 24 24"><path d="m5 12 5 5 9-10"/></svg>Lihat demo dulu sebelum online</div>
+        </div>
+        <a class="btn btn-acc" href="#kontak">Konsultasi gratis <svg class="ico" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        <div class="phone" aria-hidden="true"><img src="img/bardi-m.jpg" alt=""></div>
+      </div>
+      <div class="extras">
+        <div class="head reveal"><b>Bonus untuk naik kelas</b><p>Tambahan opsional, bisa dipasang bersamaan atau belakangan.</p></div>
+        <div class="ex reveal d1"><span class="ei"><svg class="ico" viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="m7 15 4-4 3 3 5-6"/></svg></span><div><h4>Dasbor AI <em>BARU</em></h4><p>Rekap penjualan, pengeluaran, dan pelanggan dalam satu layar. Laporan bisa dikirim otomatis.</p></div></div>
+        <div class="ex reveal d2"><span class="ei"><svg class="ico" viewBox="0 0 24 24"><path d="M4 20l1.3-4A8 8 0 1 1 8 18.7z"/><path d="M9 10h.01M12 10h.01M15 10h.01"/></svg></span><div><h4>Otomatisasi AI</h4><p>Chatbot WhatsApp yang membalas pembeli 24 jam, plus pengingat dan laporan lewat Telegram.</p></div></div>
+        <div class="ex reveal d3"><span class="ei"><svg class="ico" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/></svg></span><div><h4>Aplikasi Kasir</h4><p>Catat transaksi harian dari HP atau laptop, dengan akun untuk karyawan.</p></div></div>
+      </div>
+    </div>
+
+    <!-- AI showcase -->
+    <div class="dashrow" id="ai">
+      <div class="reveal">
+        <span class="kick" style="color:var(--blue)">Dasbor &amp; otomatisasi AI</span>
+        <h2 class="h2" style="font-size:clamp(30px,3.6vw,46px)">Website sudah jalan? Biar <span class="serif" style="color:#a9c1ff">AI</span> yang bantu urus sisanya.</h2>
+        <p class="lead">Pertanyaan pembeli dijawab otomatis, penjualan tercatat rapi, dan Anda tinggal baca ringkasannya setiap hari.</p>
+        <div class="ctas"><a class="btn btn-ghost" href="#kontak">Tanya soal dasbor AI →</a></div>
+      </div>
+      <div class="reveal d1">
+        <div class="dash" id="dash">
+          <div class="dtop"><b>Dasbor Usaha</b><span>Contoh tampilan</span></div>
+          <div class="kpis">
+            <div class="kpi"><small>Pesanan</small><b>Hari ini</b><em>tercatat otomatis</em></div>
+            <div class="kpi"><small>Omzet</small><b>Mingguan</b><em>rekap per hari</em></div>
+            <div class="kpi"><small>Pelanggan</small><b>Baru</b><em>dari WhatsApp</em></div>
+          </div>
+          <div class="bars"><i style="--h:38%"></i><i style="--h:52%"></i><i style="--h:44%"></i><i style="--h:66%"></i><i style="--h:58%"></i><i class="top" style="--h:88%"></i><i style="--h:70%"></i></div>
+          <div class="botmsg"><div class="bh"><svg class="ico" style="width:16px;height:16px" viewBox="0 0 24 24"><rect x="4" y="8" width="16" height="12" rx="3"/><path d="M12 4v4M9 13h.01M15 13h.01"/></svg>Asisten AI · laporan harian</div><p>Ringkasan hari ini sudah siap: pesanan, omzet, dan menu terlaris. Mau saya kirim ke Telegram?</p></div>
+        </div>
+        <p class="mock-note">*Ilustrasi tampilan. Isi dasbor disesuaikan dengan kebutuhan usaha Anda.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROSES -->
+<section id="proses">
+  <div class="wrap">
+    <div class="reveal">
+      <span class="kick">Proses</span>
+      <h2 class="h2">Lihat dulu, <span class="serif">baru online.</span></h2>
+      <p class="lead">Anda tidak membeli kucing dalam karung. Demo website dikirim lebih dulu, direvisi sampai cocok, baru ditayangkan.</p>
+    </div>
+    <div class="steps">
+      <div class="st reveal"><div class="n">01</div><h4>Konsultasi</h4><p>Ceritakan usaha, pelanggan, dan apa yang ingin ditampilkan. Gratis, lewat WhatsApp.</p><span class="tag">Gratis</span></div>
+      <div class="st reveal d1"><div class="n">02</div><h4>Demo desain</h4><p>Kami kirim link demo website yang bisa langsung Anda buka di HP.</p><span class="tag">Link pratinjau</span></div>
+      <div class="st reveal d2"><div class="n">03</div><h4>Revisi</h4><p>Kirim catatan perubahan: foto, teks, warna, nomor WA. Kami yang ubahkan.</p><span class="tag">Sampai cocok</span></div>
+      <div class="st reveal d3"><div class="n">04</div><h4>Online</h4><p>Website tayang dengan link sendiri, siap dibagikan ke status, bio, dan grup.</p><span class="tag">Siap dibagikan</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq" style="padding-top:40px">
+  <div class="wrap faqw">
+    <div class="reveal">
+      <span class="kick">Pertanyaan umum</span>
+      <h2 class="h2">Yang sering <span class="serif">ditanyakan.</span></h2>
+      <p class="lead">Pertanyaan lain? Langsung chat saja, konsultasinya gratis.</p>
+    </div>
+    <div class="reveal d1">
+      <div class="qa open"><button aria-expanded="true">Bisa lihat contohnya dulu sebelum bayar penuh?<span class="pm"><svg class="ico" style="width:16px;height:16px" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></span></button><div class="ans"><div><p>Bisa. Kami kirim link demo website lebih dulu supaya Anda bisa melihat dan mencoba langsung di HP. Website baru ditayangkan setelah Anda setuju.</p></div></div></div>
+      <div class="qa"><button aria-expanded="false">Berapa biaya pembuatan website?<span class="pm"><svg class="ico" style="width:16px;height:16px" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></span></button><div class="ans"><div><p>Tergantung jumlah halaman dan fitur yang dibutuhkan. Ceritakan kebutuhan Anda lewat WhatsApp, rincian biayanya kami kirimkan sebelum pekerjaan dimulai.</p></div></div></div>
+      <div class="qa"><button aria-expanded="false">Apakah harus punya domain sendiri?<span class="pm"><svg class="ico" style="width:16px;height:16px" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></span></button><div class="ans"><div><p>Tidak harus. Website bisa langsung online dengan alamat gratis (misalnya namausaha.vercel.app). Kalau nanti ingin domain sendiri seperti .com atau .id, bisa ditambahkan.</p></div></div></div>
+      <div class="qa"><button aria-expanded="false">Kalau mau ganti foto atau teks setelah online?<span class="pm"><svg class="ico" style="width:16px;height:16px" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></span></button><div class="ans"><div><p>Kirim saja perubahannya lewat WhatsApp, kami yang ubahkan. Link websitenya tetap sama, jadi yang sudah Anda bagikan tidak perlu diganti.</p></div></div></div>
+      <div class="qa"><button aria-expanded="false">Bisa ditambah chatbot WA atau dasbor AI?<span class="pm"><svg class="ico" style="width:16px;height:16px" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></span></button><div class="ans"><div><p>Bisa, bersamaan dengan pembuatan website atau belakangan saat usaha makin ramai. Kami jelaskan pilihannya saat konsultasi.</p></div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- KONTAK -->
+<section id="kontak" style="padding-top:40px">
+  <div class="wrap">
+    <div class="kontak reveal">
+      <div>
+        <span class="kick">Kontak</span>
+        <h2 class="h2">Ceritakan usaha Anda, kami siapkan <span class="serif">demonya.</span></h2>
+        <p class="lead">Isi formulir di samping, pesan Anda langsung terbuka di WhatsApp. Atau chat langsung:</p>
+        <a class="wa-card" href="https://wa.me/6285871734159"><span class="wi"><svg class="ico" viewBox="0 0 24 24"><path d="M4 20l1.3-4A8 8 0 1 1 8 18.7z"/><path d="M9 9.5c0 3 2.5 5.5 5.5 5.5l1-1.5-2-1-1 .8a4 4 0 0 1-2-2l.8-1-1-2z"/></svg></span><span><b>0858-7173-4159</b><small>WhatsApp · Aditiya Firmansyah</small></span></a>
+      </div>
+      <form id="form" onsubmit="return false">
+        <div class="f2">
+          <label>Nama Anda<input id="fn" placeholder="Nama"></label>
+          <label>Nama usaha<input id="fu" placeholder="Contoh: Dimsum Enaqo"></label>
+        </div>
+        <label>Jenis usaha<select id="fj"><option>Kuliner / kafe</option><option>Toko / UMKM</option><option>Jasa</option><option>Pendidikan / kursus</option><option>Lainnya</option></select></label>
+        <div><span style="font-size:13px;font-weight:600;color:#c2cbdc">Yang dibutuhkan</span>
+          <div class="chk" style="margin-top:8px"><label><input type="checkbox" value="Website" checked>Website</label><label><input type="checkbox" value="Dasbor AI">Dasbor AI</label><label><input type="checkbox" value="Chatbot WA / otomatisasi AI">Otomatisasi AI</label><label><input type="checkbox" value="Aplikasi kasir">Aplikasi kasir</label></div>
+        </div>
+        <label>Ceritakan kebutuhan Anda<textarea id="fk" placeholder="Misalnya: ingin website menu yang bisa langsung pesan ke WA"></textarea></label>
+        <a class="btn btn-acc" id="send" href="https://wa.me/6285871734159" target="_blank" rel="noopener">Kirim lewat WhatsApp <svg class="ico" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="fg">
+      <div><a href="#" class="logo"><i>W</i><span>Website UMKM<small>oleh Aditiya Firmansyah</small></span></a><p class="about">Jasa pembuatan website untuk UMKM, dengan tambahan dasbor dan otomatisasi AI untuk usaha yang ingin naik kelas.</p></div>
+      <div><h5>Layanan</h5><ul><li><a href="#layanan">Website UMKM</a></li><li><a href="#ai">Dasbor AI</a></li><li><a href="#ai">Otomatisasi AI</a></li><li><a href="#layanan">Aplikasi kasir</a></li></ul></div>
+      <div><h5>Studio</h5><ul><li><a href="#karya">Portofolio</a></li><li><a href="#proses">Proses kerja</a></li><li><a href="#faq">FAQ</a></li></ul></div>
+      <div><h5>Kontak</h5><ul><li><a href="https://wa.me/6285871734159">WhatsApp</a></li><li><a href="#kontak">Konsultasi gratis</a></li></ul></div>
+    </div>
+    <div class="fbot"><span>© 2026 Website UMKM · Aditiya Firmansyah</span><span>Lihat demo dulu, baru online.</span></div>
+  </div>
+  <div class="huge" aria-hidden="true">WEBSITE UMKM</div>
+</footer>
+
+<a class="fwa" href="https://wa.me/6285871734159" aria-label="Chat WhatsApp"><svg class="ico" style="width:28px;height:28px;color:#fff" viewBox="0 0 24 24"><path d="M4 20l1.3-4A8 8 0 1 1 8 18.7z"/><path d="M9 9.5c0 3 2.5 5.5 5.5 5.5l1-1.5-2-1-1 .8a4 4 0 0 1-2-2l.8-1-1-2z"/></svg></a>
+
+<script>
+(function(){
+  var nav=document.getElementById('nav');
+  addEventListener('scroll',function(){nav.classList.toggle('scrolled',scrollY>30)},{passive:true});
+  var t=document.getElementById('mtrack');t.innerHTML+=t.innerHTML;
+  var t2=document.getElementById('mtrack2');t2.innerHTML+=t2.innerHTML;
+  var prog=document.getElementById('prog');
+  addEventListener('scroll',function(){var h=document.documentElement;prog.style.width=(h.scrollTop/(h.scrollHeight-h.clientHeight)*100)+'%'},{passive:true});
+  var hero=document.querySelector('.hero'),spot=document.getElementById('spot');
+  if(matchMedia('(hover:hover)').matches){
+    hero.addEventListener('mousemove',function(e){var r=hero.getBoundingClientRect();spot.style.setProperty('--mx',(e.clientX-r.left)+'px');spot.style.setProperty('--my',(e.clientY-r.top)+'px')});
+    document.querySelectorAll('.pc').forEach(function(c){
+      c.addEventListener('mousemove',function(e){var r=c.getBoundingClientRect(),x=(e.clientX-r.left)/r.width,y=(e.clientY-r.top)/r.height;
+        c.style.transform='perspective(900px) rotateY('+((x-.5)*7)+'deg) rotateX('+((.5-y)*7)+'deg) translateY(-6px)';
+        c.style.setProperty('--gx',x*100+'%');c.style.setProperty('--gy',y*100+'%')});
+      c.addEventListener('mouseleave',function(){c.style.transform=''})});
+  }
+  document.querySelectorAll('.count').forEach(function(el){var to=+el.dataset.to,n=0;var iv=setInterval(function(){n++;el.textContent=n;if(n>=to)clearInterval(iv)},180)});
+
+  var els=document.querySelectorAll('.reveal,#dash');
+  if('IntersectionObserver' in window){var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.12});els.forEach(function(el){io.observe(el)})}
+  else els.forEach(function(el){el.classList.add('in')});
+  // filters
+  var bs=document.querySelectorAll('.filters button'),cs=document.querySelectorAll('.pc');
+  bs.forEach(function(b){b.addEventListener('click',function(){bs.forEach(function(x){x.classList.remove('on')});b.classList.add('on');var f=b.dataset.f;
+    cs.forEach(function(c){c.classList.toggle('hide',!(f==='all'||c.dataset.c.split(' ').indexOf(f)>-1))})})});
+  // faq
+  document.querySelectorAll('.qa button').forEach(function(b){b.addEventListener('click',function(){var q=b.parentNode,o=q.classList.contains('open');
+    document.querySelectorAll('.qa.open').forEach(function(x){x.classList.remove('open');x.querySelector('button').setAttribute('aria-expanded','false')});
+    if(!o){q.classList.add('open');b.setAttribute('aria-expanded','true')}})});
+  // form -> whatsapp link
+  var send=document.getElementById('send'),form=document.getElementById('form');
+  function upd(){var v=function(id){return document.getElementById(id).value.trim()};
+    var need=[].map.call(form.querySelectorAll('.chk input:checked'),function(i){return i.value}).join(', ');
+    var msg='Halo, saya ingin konsultasi Website UMKM.\n\nNama: '+(v('fn')||'-')+'\nUsaha: '+(v('fu')||'-')+'\nJenis usaha: '+v('fj')+'\nKebutuhan: '+(need||'-')+'\nCerita: '+(v('fk')||'-');
+    send.href='https://wa.me/6285871734159?text='+encodeURIComponent(msg)}
+  form.addEventListener('input',upd);form.addEventListener('change',upd);upd();
+})();
+</script>
+</body>
+</html>
