@@ -105,6 +105,8 @@ nav.top .btn{height:44px;padding:0 20px;font-size:14px}
 .pc{background:var(--card);border:1px solid var(--line);border-radius:24px;overflow:hidden;display:flex;flex-direction:column;transition:transform .45s,border-color .45s,opacity .35s}
 .pc:hover{transform:translateY(-6px);border-color:rgba(34,197,94,.5)}
 .pc.hide{display:none}
+.pimg .mini{position:absolute;right:14px;bottom:14px;width:42%;height:auto;aspect-ratio:auto;border-radius:10px;border:2px solid rgba(255,255,255,.85);box-shadow:0 12px 30px rgba(0,0,0,.5);object-fit:cover;object-position:top}
+
 .pimg{position:relative;aspect-ratio:16/10;overflow:hidden;background:#0a0f1c}
 .pimg img{width:100%;height:100%;object-fit:cover;object-position:top;transition:transform 1.2s cubic-bezier(.2,.7,.2,1)}
 .pc:hover .pimg img{transform:scale(1.05)}
@@ -284,10 +286,10 @@ footer{border-top:1px solid var(--line);padding:70px 0 0;position:relative;overf
     <p class="sub reveal d2">Website untuk UMKM yang tampil rapi di HP, pesanan langsung masuk WhatsApp, dan siap dibagikan ke pelanggan. Lihat demonya dulu sebelum online.</p>
     <div class="ctas reveal d3">
       <a class="btn btn-acc" href="#kontak">Konsultasi gratis <svg class="ico" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-      <a class="btn btn-ghost" href="#karya">Lihat <b>5</b> karya</a>
+      <a class="btn btn-ghost" href="#karya">Lihat <b>7</b> karya</a>
     </div>
     <div class="facts reveal d3">
-      <div class="fact"><b><em class="count" data-to="5">0</em></b><span>Karya sudah online &amp; dipakai</span></div>
+      <div class="fact"><b><em class="count" data-to="7">0</em></b><span>Karya sudah online &amp; dipakai</span></div>
       <div class="fact"><b>HP</b><span>Tampil rapi di layar ponsel</span></div>
       <div class="fact"><b>WA</b><span>Pesanan langsung ke WhatsApp</span></div>
       <div class="fact"><b>+<em>AI</em></b><span>Bisa ditambah dasbor &amp; otomatisasi</span></div>
@@ -310,14 +312,14 @@ footer{border-top:1px solid var(--line);padding:70px 0 0;position:relative;overf
       <div class="reveal">
         <span class="kick">Portofolio</span>
         <h2 class="h2">Karya yang sudah <span class="serif">online.</span></h2>
-        <p class="lead">Website dan aplikasi yang dibangun untuk usaha sungguhan. Klik karya untuk membukanya langsung.</p>
+        <p class="lead">Website, aplikasi, dasbor, dan otomatisasi AI yang dipakai sungguhan. Klik karya website untuk membukanya langsung. Dasbor dan Kantor AI memakai login, jadi angka di tampilannya kami samarkan.</p>
       </div>
     </div>
     <div class="filters reveal" role="tablist">
-      <button class="on" data-f="all">Semua <em>5</em></button>
+      <button class="on" data-f="all">Semua <em>7</em></button>
       <button data-f="web">Website <em>4</em></button>
-      <button data-f="app">Aplikasi <em>1</em></button>
-      <button data-f="ai">Otomasi AI <em>1</em></button>
+      <button data-f="app">Aplikasi &amp; Dasbor <em>2</em></button>
+      <button data-f="ai">Otomasi AI <em>3</em></button>
     </div>
     <div class="pgrid">
       <a class="pc reveal" data-c="web" href="https://dimsum-enaqo.vercel.app" target="_blank" rel="noopener">
@@ -353,6 +355,20 @@ footer{border-top:1px solid var(--line);padding:70px 0 0;position:relative;overf
         <div class="pbody">
           <div class="ptop"><div><h3>Kasir Dimsum Enaqo</h3><p class="sub">Aplikasi kasir UMKM kuliner</p></div><span class="arrow" title="Aplikasi internal klien"><svg class="ico" viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg></span></div>
           <div class="tags"><span>Aplikasi kasir</span><span>Login karyawan</span><span>Sesuai warna logo</span></div>
+        </div>
+      </div>
+      <div class="pc reveal" data-c="app ai">
+        <div class="pimg"><img src="img/honda-bisnis.jpg" alt="Dasbor penjualan Konsultan Honda"><span class="status"><i></i>Dipakai setiap hari</span><img class="mini" src="img/honda-pribadi.jpg" alt="Dasbor keuangan pribadi"></div>
+        <div class="pbody">
+          <div class="ptop"><div><h3>Dasbor Bisnis &amp; Keuangan</h3><p class="sub">Dasbor penjualan Konsultan Honda + keuangan pribadi terpisah</p></div><span class="arrow" title="Aplikasi pribadi, pakai login"><svg class="ico" viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg></span></div>
+          <div class="tags"><span>Rekap omzet</span><span>Leads</span><span>Target</span><span>Export Excel</span><span>Mode Bisnis / Pribadi</span></div>
+        </div>
+      </div>
+      <div class="pc reveal d1" data-c="ai">
+        <div class="pimg"><img src="img/kantor-ai.jpg" alt="Kantor AI: tim AI untuk konten otomatis"><span class="status"><i></i>Berjalan 24 jam</span></div>
+        <div class="pbody">
+          <div class="ptop"><div><h3>Kantor AI</h3><p class="sub">Tim AI yang bikin konten, posting promosi, dan kirim rekap otomatis</p></div><span class="arrow" title="Aplikasi pribadi, pakai login"><svg class="ico" viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg></span></div>
+          <div class="tags"><span>Konten otomatis</span><span>Posting terjadwal</span><span>Balas chat WA</span><span>Rekap Telegram</span></div>
         </div>
       </div>
       <a class="pc next reveal d1" data-c="web app ai" href="#kontak">
