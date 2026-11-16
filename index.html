@@ -6,11 +6,11 @@
 <title>Website UMKM – Jasa Pembuatan Website untuk UMKM</title>
 <meta name="description" content="Website UMKM: jasa pembuatan website untuk usaha kecil. Tampil rapi di HP, pesanan langsung ke WhatsApp. Bisa ditambah dasbor AI dan otomatisasi AI.">
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://website-umkm.vercel.app/">
+<meta property="og:url" content="https://website-umkm-aditiya.vercel.app/">
 <meta property="og:site_name" content="Website UMKM">
 <meta property="og:title" content="Website UMKM – Website yang bikin usaha Anda dipercaya">
 <meta property="og:description" content="Jasa pembuatan website untuk UMKM. Tampil rapi di HP, pesanan langsung ke WhatsApp. Lihat demonya dulu, baru online.">
-<meta property="og:image" content="https://website-umkm.vercel.app/img/og.jpg">
+<meta property="og:image" content="https://website-umkm-aditiya.vercel.app/img/og.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
@@ -236,6 +236,23 @@ footer{border-top:1px solid var(--line);padding:70px 0 0;position:relative;overf
 .marq2 .mtrack{animation-direction:reverse;animation-duration:46s}
 .marq2 .mtrack span{color:rgba(255,255,255,.35);font-size:15px}
 .marq2 .mtrack span::before{content:"●";color:#5b8cff;font-size:8px}
+
+.gbanner{display:grid;grid-template-columns:1fr;gap:34px;align-items:center;padding:28px 22px;border-radius:30px;background:linear-gradient(135deg,#0f1a33,#0b1222);border:1px solid rgba(91,140,255,.35);position:relative;overflow:hidden}
+@media(min-width:640px){.gbanner{padding:44px}}@media(min-width:980px){.gbanner{grid-template-columns:1.1fr 1fr;padding:56px}}
+.gbanner::before{content:"";position:absolute;right:-120px;top:-120px;width:420px;height:420px;border-radius:50%;background:rgba(91,140,255,.18);filter:blur(100px)}
+.gsearch{position:relative;background:#fff;color:#202124;border-radius:22px;padding:22px;box-shadow:0 30px 70px rgba(0,0,0,.5);font-family:Arial,Helvetica,sans-serif}
+.gsearch .bar{display:flex;align-items:center;gap:10px;border:1px solid #dfe1e5;border-radius:999px;padding:10px 16px;font-size:15px;color:#3c4043}
+.gsearch .bar svg{width:18px;height:18px;stroke:#5f6368;fill:none;stroke-width:2}
+.gsearch .res{margin-top:18px;padding:14px;border-radius:14px;background:#f8faf9;border:1px solid #e3efe7}
+.gsearch .res small{display:flex;align-items:center;gap:8px;font-size:12px;color:#4d5156}
+.gsearch .res small i{width:22px;height:22px;border-radius:50%;background:#22c55e;display:grid;place-items:center;color:#04210f;font-style:normal;font-weight:900;font-size:11px}
+.gsearch .res b{display:block;color:#1a0dab;font-size:19px;font-weight:400;margin-top:6px}
+.gsearch .res p{font-size:13px;color:#4d5156;margin-top:4px;line-height:1.5}
+.gsearch .map{display:flex;gap:12px;align-items:center;margin-top:12px;padding:12px 14px;border-radius:14px;border:1px solid #e8eaed;font-size:13px;color:#3c4043}
+.gsearch .map span{width:34px;height:34px;border-radius:10px;background:#e8f0fe;display:grid;place-items:center;color:#1a73e8;font-weight:700}
+.gsearch .note{position:absolute;right:16px;top:-14px;background:#5b8cff;color:#fff;font-family:Inter,sans-serif;font-size:11px;font-weight:800;letter-spacing:1px;padding:5px 10px;border-radius:999px}
+.gl li{list-style:none;display:flex;gap:12px;align-items:flex-start;color:#dbe3f0;font-size:15px;line-height:1.5;margin-top:12px}
+.gl li svg{color:#8fb0ff;margin-top:2px}
 .fwa{position:fixed;right:20px;bottom:20px;width:58px;height:58px;border-radius:50%;background:#25d366;display:grid;place-items:center;z-index:90;box-shadow:0 12px 30px rgba(0,0,0,.45);transition:transform .3s}
 .fwa:hover{transform:scale(1.08)}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}.dash .bars i{height:var(--h)}}
@@ -246,7 +263,7 @@ footer{border-top:1px solid var(--line);padding:70px 0 0;position:relative;overf
 
 <nav class="top" id="nav">
   <a href="#" class="logo"><i>W</i><span>Website UMKM<small>oleh Aditiya Firmansyah</small></span></a>
-  <div class="navl"><a href="#karya">Karya</a><a href="#layanan">Layanan</a><a href="#ai">Dasbor &amp; AI</a><a href="#proses">Proses</a><a href="#faq">FAQ</a></div>
+  <div class="navl"><a href="#karya">Karya</a><a href="#layanan">Layanan</a><a href="#ai">Dasbor &amp; AI</a><a href="#google">Google</a><a href="#proses">Proses</a><a href="#faq">FAQ</a></div>
   <a class="btn btn-acc" href="#kontak">Konsultasi gratis</a>
 </nav>
 
@@ -368,6 +385,8 @@ footer{border-top:1px solid var(--line);padding:70px 0 0;position:relative;overf
           <div><svg class="ico" viewBox="0 0 24 24"><path d="m5 12 5 5 9-10"/></svg>Menu, katalog &amp; testimoni</div>
           <div><svg class="ico" viewBox="0 0 24 24"><path d="m5 12 5 5 9-10"/></svg>Link siap dibagikan ke status &amp; bio</div>
           <div><svg class="ico" viewBox="0 0 24 24"><path d="m5 12 5 5 9-10"/></svg>Lihat demo dulu sebelum online</div>
+          <div><svg class="ico" viewBox="0 0 24 24"><path d="m5 12 5 5 9-10"/></svg>Bantu muncul di Google &amp; Maps</div>
+          <div><svg class="ico" viewBox="0 0 24 24"><path d="m5 12 5 5 9-10"/></svg>Bisa pakai domain sendiri</div>
         </div>
         <a class="btn btn-acc" href="#kontak">Konsultasi gratis <svg class="ico" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
         <div class="phone" aria-hidden="true"><img src="img/bardi-m.jpg" alt=""></div>
@@ -422,6 +441,31 @@ footer{border-top:1px solid var(--line);padding:70px 0 0;position:relative;overf
   </div>
 </section>
 
+<!-- ONLINE & GOOGLE -->
+<section id="google" style="padding-top:20px">
+  <div class="wrap">
+    <div class="gbanner reveal">
+      <div style="position:relative">
+        <span class="kick" style="color:#8fb0ff">Online &amp; muncul di Google</span>
+        <h2 class="h2" style="font-size:clamp(30px,3.6vw,46px)">Mau usaha Anda online dan <span class="serif" style="color:#a9c1ff">ditemukan di Google?</span></h2>
+        <p class="lead" style="color:#c2cbdc">Punya website tapi belum online, atau usaha belum muncul saat dicari di Google dan Google Maps? Konsultasikan ke kami, kami bantu sampai beres.</p>
+        <ul class="gl">
+          <li><svg class="ico" viewBox="0 0 24 24"><path d="m5 12 5 5 9-10"/></svg>Bantu online-kan website, termasuk domain sendiri (.com / .id)</li>
+          <li><svg class="ico" viewBox="0 0 24 24"><path d="m5 12 5 5 9-10"/></svg>Daftarkan website ke Google supaya bisa muncul di pencarian</li>
+          <li><svg class="ico" viewBox="0 0 24 24"><path d="m5 12 5 5 9-10"/></svg>Bantu pasang profil usaha di Google Maps</li>
+        </ul>
+        <div class="ctas"><a class="btn btn-acc" href="https://wa.me/6285871734159?text=Halo%2C%20saya%20mau%20konsultasi%20supaya%20website%2Fusaha%20saya%20online%20dan%20muncul%20di%20Google.">Konsultasi online &amp; Google <svg class="ico" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+      </div>
+      <div class="gsearch" aria-hidden="true">
+        <span class="note">ILUSTRASI</span>
+        <div class="bar"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>dimsum enak di cirebon</div>
+        <div class="res"><small><i>W</i>usaha-anda.com</small><b>Nama Usaha Anda – Menu &amp; Pesan Online</b><p>Lihat menu, harga, dan lokasi. Pesan langsung lewat WhatsApp.</p></div>
+        <div class="map"><span>📍</span><div><b style="color:#202124">Usaha Anda</b><br>Buka · Petunjuk arah · Telepon</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- FAQ -->
 <section id="faq" style="padding-top:40px">
   <div class="wrap faqw">
@@ -435,6 +479,7 @@ footer{border-top:1px solid var(--line);padding:70px 0 0;position:relative;overf
       <div class="qa"><button aria-expanded="false">Berapa biaya pembuatan website?<span class="pm"><svg class="ico" style="width:16px;height:16px" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></span></button><div class="ans"><div><p>Tergantung jumlah halaman dan fitur yang dibutuhkan. Ceritakan kebutuhan Anda lewat WhatsApp, rincian biayanya kami kirimkan sebelum pekerjaan dimulai.</p></div></div></div>
       <div class="qa"><button aria-expanded="false">Apakah harus punya domain sendiri?<span class="pm"><svg class="ico" style="width:16px;height:16px" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></span></button><div class="ans"><div><p>Tidak harus. Website bisa langsung online dengan alamat gratis (misalnya namausaha.vercel.app). Kalau nanti ingin domain sendiri seperti .com atau .id, bisa ditambahkan.</p></div></div></div>
       <div class="qa"><button aria-expanded="false">Kalau mau ganti foto atau teks setelah online?<span class="pm"><svg class="ico" style="width:16px;height:16px" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></span></button><div class="ans"><div><p>Kirim saja perubahannya lewat WhatsApp, kami yang ubahkan. Link websitenya tetap sama, jadi yang sudah Anda bagikan tidak perlu diganti.</p></div></div></div>
+      <div class="qa"><button aria-expanded="false">Bisa bantu website saya muncul di Google?<span class="pm"><svg class="ico" style="width:16px;height:16px" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></span></button><div class="ans"><div><p>Bisa. Kami bantu daftarkan website ke Google dan pasang profil usaha di Google Maps. Konsultasikan dulu lewat WhatsApp, kami jelaskan langkah dan pilihannya.</p></div></div></div>
       <div class="qa"><button aria-expanded="false">Bisa ditambah chatbot WA atau dasbor AI?<span class="pm"><svg class="ico" style="width:16px;height:16px" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></span></button><div class="ans"><div><p>Bisa, bersamaan dengan pembuatan website atau belakangan saat usaha makin ramai. Kami jelaskan pilihannya saat konsultasi.</p></div></div></div>
     </div>
   </div>
@@ -457,7 +502,7 @@ footer{border-top:1px solid var(--line);padding:70px 0 0;position:relative;overf
         </div>
         <label>Jenis usaha<select id="fj"><option>Kuliner / kafe</option><option>Toko / UMKM</option><option>Jasa</option><option>Pendidikan / kursus</option><option>Lainnya</option></select></label>
         <div><span style="font-size:13px;font-weight:600;color:#c2cbdc">Yang dibutuhkan</span>
-          <div class="chk" style="margin-top:8px"><label><input type="checkbox" value="Website" checked>Website</label><label><input type="checkbox" value="Dasbor AI">Dasbor AI</label><label><input type="checkbox" value="Chatbot WA / otomatisasi AI">Otomatisasi AI</label><label><input type="checkbox" value="Aplikasi kasir">Aplikasi kasir</label></div>
+          <div class="chk" style="margin-top:8px"><label><input type="checkbox" value="Website" checked>Website</label><label><input type="checkbox" value="Dasbor AI">Dasbor AI</label><label><input type="checkbox" value="Chatbot WA / otomatisasi AI">Otomatisasi AI</label><label><input type="checkbox" value="Aplikasi kasir">Aplikasi kasir</label><label><input type="checkbox" value="Online-kan &amp; muncul di Google">Online &amp; Google</label></div>
         </div>
         <label>Ceritakan kebutuhan Anda<textarea id="fk" placeholder="Misalnya: ingin website menu yang bisa langsung pesan ke WA"></textarea></label>
         <a class="btn btn-acc" id="send" href="https://wa.me/6285871734159" target="_blank" rel="noopener">Kirim lewat WhatsApp <svg class="ico" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
