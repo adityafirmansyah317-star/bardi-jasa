@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dewan AI – Dewan Penasihat CEO</title>
+<meta name="description" content="Dewan AI: dewan penasihat virtual untuk CEO. 8 AI Agent setingkat C-level membedah setiap keputusan, lengkap dengan bantahan dan rencana aksi.">
+<meta property="og:title" content="Dewan AI – Dewan Penasihat CEO">
+<meta property="og:description" content="8 AI Agent setingkat C-level membantu CEO mengambil keputusan strategis. Coba demonya.">
+<meta property="og:image" content="/og.jpg"><meta property="og:type" content="website">
+<meta name="theme-color" content="#020410">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%236f7dff'/%3E%3Cstop offset='1' stop-color='%232a17ff'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='16' fill='url(%23g)'/%3E%3Ctext x='32' y='44' text-anchor='middle' font-family='Georgia,serif' font-style='italic' font-size='36' fill='white'%3ED%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/marked/12.0.2/marked.min.js"></script>
+<style>
+:root{
+  --bg:#020410;--panel:#070a1c;--panel2:#0c1029;--line:rgba(255,255,255,.08);--text:#e8ecf4;--mut:#8b95ab;
+  --gold:#4a5cff;--gold2:#a9b3ff;--ok:#4fd1a1;--bad:#f07a7a;--blue:#6aa8ff;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--text);font-size:14.5px;line-height:1.55}
+button{font:inherit;color:inherit;cursor:pointer;border:0;background:none}
+input,select,textarea{font:inherit;color:var(--text)}
+.app{display:grid;grid-template-columns:300px 1fr;height:100vh}
+/* sidebar */
+aside{background:var(--panel);border-right:1px solid var(--line);display:flex;flex-direction:column;min-height:0}
+.brand{display:flex;align-items:center;gap:11px;padding:20px 20px 16px;border-bottom:1px solid var(--line)}
+.mark{width:38px;height:38px;border-radius:11px;background:linear-gradient(135deg,#6f7dff,#2a17ff);display:grid;place-items:center;color:#fff;font-weight:600;font-size:19px;font-style:italic;text-decoration:none;box-shadow:0 0 24px rgba(74,92,255,.45)}
+.brand b{display:block;font-size:15.5px;letter-spacing:.3px}
+.brand small{color:var(--mut);font-size:11.5px}
+.co{margin:14px 16px 6px;padding:12px 14px;border:1px solid var(--line);border-radius:12px;background:var(--panel2);cursor:pointer;text-align:left;width:calc(100% - 32px)}
+.co:hover{border-color:#34405c}
+.co .l{font-size:10.5px;letter-spacing:1px;text-transform:uppercase;color:var(--mut)}
+.co .n{font-weight:700;margin-top:2px}
+.co .s{font-size:12px;color:var(--mut)}
+.sec{padding:14px 20px 6px;font-size:10.5px;letter-spacing:1.2px;text-transform:uppercase;color:var(--mut);display:flex;justify-content:space-between}
+.agents{overflow:auto;padding:0 10px 14px;flex:1}
+.ag{display:flex;align-items:center;gap:10px;padding:9px 10px;border-radius:10px;cursor:pointer;position:relative}
+.ag:hover{background:var(--panel2)}
+.ag.sel{background:rgba(74,92,255,.12);box-shadow:inset 0 0 0 1px rgba(74,92,255,.4)}
+.av{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;font-size:16px;flex:none}
+.ag .t{flex:1;min-width:0}
+.ag .t b{display:block;font-size:13.5px;font-weight:600}
+.ag .t span{display:block;font-size:11.5px;color:var(--mut);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ag.off{opacity:.42}
+.tog{width:30px;height:17px;border-radius:9px;background:#2a3348;position:relative;flex:none;transition:.2s}
+.tog::after{content:"";position:absolute;width:13px;height:13px;border-radius:50%;background:#fff;top:2px;left:2px;transition:.2s}
+.tog.on{background:var(--gold)}
+.tog.on::after{left:15px}
+.foot{padding:12px 20px;border-top:1px solid var(--line);font-size:11px;color:var(--mut)}
+/* main */
+main{display:flex;flex-direction:column;min-width:0;min-height:0}
+.top{display:flex;align-items:center;gap:12px;padding:14px 26px;border-bottom:1px solid var(--line);background:rgba(11,15,23,.85);backdrop-filter:blur(8px)}
+.top h1{font-size:16px;font-weight:700}
+.top .sub{font-size:12px;color:var(--mut)}
+.top .sp{flex:1}
+.modes{display:flex;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:3px}
+.modes button{padding:6px 12px;border-radius:7px;font-size:12.5px;color:var(--mut);font-weight:600}
+.modes button.on{background:var(--panel2);color:var(--text);box-shadow:inset 0 0 0 1px var(--line)}
+.ib{padding:7px 12px;border:1px solid var(--line);border-radius:9px;font-size:12.5px;color:var(--mut)}
+.ib:hover{color:var(--text);border-color:#34405c}
+.menu-btn{display:none}
+.feed{flex:1;overflow:auto;padding:28px 26px 10px}
+.wrap{max-width:860px;margin:0 auto}
+/* welcome */
+.hero{padding:26px 0 8px}
+.pill{display:inline-flex;gap:7px;align-items:center;font-size:11.5px;color:var(--gold2);border:1px solid rgba(74,92,255,.35);background:rgba(74,92,255,.08);padding:4px 10px;border-radius:99px;font-weight:600}
+.hero h2{font-size:30px;line-height:1.2;margin:14px 0 8px;letter-spacing:-.4px}
+.hero h2{font-weight:300}.hero h2 em{font-style:italic;color:var(--gold2)}
+.hero p{color:var(--mut);max-width:620px}
+.board{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:22px 0}
+.bc{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px;cursor:pointer;transition:.15s}
+.bc:hover{border-color:#3a4766;transform:translateY(-1px)}
+.bc .av{margin-bottom:10px}
+.bc b{display:block;font-size:13.5px}
+.bc span{font-size:11.5px;color:var(--mut)}
+.qs{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:20px}
+.q{text-align:left;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:12px 14px;font-size:13px}
+.q:hover{border-color:var(--gold)}
+.q code{color:var(--gold2);font-family:inherit;font-weight:700}
+/* messages */
+.msg{margin:0 0 22px;display:flex;gap:12px}
+.msg.me{justify-content:flex-end}
+.bub{background:rgba(74,92,255,.16);border:1px solid rgba(74,92,255,.35);padding:11px 15px;border-radius:14px 14px 4px 14px;max-width:75%;white-space:pre-wrap}
+.ans{flex:1;min-width:0;background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:18px 22px}
+.ans .who{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--mut);margin-bottom:10px;flex-wrap:wrap}
+.chip{display:inline-flex;align-items:center;gap:5px;padding:2px 8px;border-radius:99px;background:var(--panel2);border:1px solid var(--line);font-size:11.5px;color:var(--text)}
+.md h1,.md h2,.md h3{font-size:15.5px;margin:18px 0 8px;color:var(--gold2)}
+.md h1:first-child,.md h2:first-child,.md h3:first-child{margin-top:0}
+.md p{margin:0 0 10px}
+.md ul,.md ol{margin:0 0 10px 20px}
+.md li{margin:3px 0}
+.md strong{color:#fff}
+.md table{width:100%;border-collapse:collapse;margin:8px 0 14px;font-size:13px;display:block;overflow-x:auto}
+.md th,.md td{border:1px solid var(--line);padding:7px 10px;text-align:left;vertical-align:top}
+.md th{background:var(--panel2);color:var(--gold2);font-weight:600}
+.md blockquote{border-left:3px solid var(--gold);padding:6px 12px;background:rgba(74,92,255,.08);margin:0 0 10px;border-radius:0 8px 8px 0}
+.md code{background:var(--panel2);padding:1px 5px;border-radius:5px}
+.md hr{border:0;border-top:1px solid var(--line);margin:14px 0}
+.acts{display:flex;gap:8px;margin-top:12px}
+.acts button{font-size:12px;color:var(--mut);padding:5px 10px;border:1px solid var(--line);border-radius:8px}
+.acts button:hover{color:var(--text)}
+.dots span{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--gold);margin-right:4px;animation:b 1s infinite}
+.dots span:nth-child(2){animation-delay:.15s}.dots span:nth-child(3){animation-delay:.3s}
+@keyframes b{0%,100%{opacity:.25}50%{opacity:1}}
+/* composer */
+.comp{padding:12px 26px 18px}
+.box{max-width:860px;margin:0 auto;background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:10px 10px 10px 16px}
+.box:focus-within{border-color:#4a5a80}
+.box textarea{width:100%;background:none;border:0;outline:0;resize:none;min-height:46px;max-height:200px}
+.brow{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.cmd{font-size:11.5px;padding:4px 9px;border-radius:7px;background:var(--panel2);border:1px solid var(--line);color:var(--mut)}
+.cmd:hover{color:var(--gold2)}
+.target{font-size:12px;color:var(--mut)}
+.target b{color:var(--gold2)}
+.send{margin-left:auto;background:linear-gradient(135deg,#5b6bff,#2a17ff);box-shadow:0 6px 24px rgba(42,23,255,.4);color:#fff;font-weight:700;padding:8px 16px;border-radius:10px}
+.send:disabled{opacity:.4;cursor:default}
+.note{max-width:860px;margin:8px auto 0;font-size:11px;color:var(--mut);text-align:center}
+/* modal */
+.ov{position:fixed;inset:0;background:rgba(3,6,12,.7);display:none;place-items:center;z-index:50;padding:16px}
+.ov.on{display:grid}
+.dlg{background:var(--panel);border:1px solid var(--line);border-radius:18px;width:min(560px,100%);max-height:90vh;overflow:auto;padding:22px}
+.dlg h3{font-size:17px;margin-bottom:4px}
+.dlg .d{color:var(--mut);font-size:12.5px;margin-bottom:16px}
+.f{margin-bottom:12px}
+.f label{display:block;font-size:12px;color:var(--mut);margin-bottom:5px;font-weight:600}
+.f input,.f select,.f textarea{width:100%;background:var(--panel2);border:1px solid var(--line);border-radius:9px;padding:9px 11px;outline:0}
+.f textarea{min-height:70px;resize:vertical}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.dact{display:flex;justify-content:flex-end;gap:8px;margin-top:16px}
+.pri{background:var(--gold);color:#fff;font-weight:700;padding:9px 16px;border-radius:10px}
+.sec2{border:1px solid var(--line);padding:9px 16px;border-radius:10px;color:var(--mut)}
+.toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%);background:#1f2a40;border:1px solid #33456a;padding:9px 16px;border-radius:10px;font-size:13px;opacity:0;transition:.25s;pointer-events:none;z-index:60}
+.toast.on{opacity:1}
+@media(max-width:900px){
+  .app{grid-template-columns:1fr}
+  aside{position:fixed;inset:0 auto 0 0;width:290px;z-index:40;transform:translateX(-100%);transition:.25s}
+  aside.open{transform:none;box-shadow:0 0 0 100vmax rgba(0,0,0,.5)}
+  .menu-btn{display:block}
+  .board{grid-template-columns:repeat(2,1fr)}
+  .qs{grid-template-columns:1fr}
+  .top{padding:10px 12px;gap:8px}
+  .top h1{font-size:14px;white-space:nowrap}
+  .modes button{padding:6px 9px;font-size:12px}
+  #newBtn{font-size:0;padding:7px 11px}#newBtn::before{content:"+";font-size:15px}
+  .feed{padding:18px 14px 6px}
+  .comp{padding:8px 12px 12px}
+  .hero h2{font-size:24px}
+  .top .sub{display:none}
+  .bub{max-width:88%}
+  .ans{padding:14px 15px}
+}
+/* ===== LANDING ===== */
+body.landing .app{display:none}
+body:not(.landing) #land{display:none}
+body.landing{overflow:auto;height:auto}
+#land{background:var(--bg);color:#e9eaf0;font-weight:400}
+.ln-nav{position:sticky;top:0;z-index:30;background:rgba(3,5,19,.8);backdrop-filter:blur(14px);border-bottom:1px solid rgba(255,255,255,.05)}
+.ln-in{max-width:1180px;margin:0 auto;padding:0 24px}
+.ln-nav .ln-in{display:flex;align-items:center;gap:28px;height:72px}
+.ln-logo{display:flex;align-items:center;gap:10px;font-size:20px;font-weight:600;color:#fff;text-decoration:none}
+.ln-links{display:flex;gap:26px;margin-left:auto}
+.ln-links button{color:#9da3b9;font-size:14px}.ln-links button:hover{color:#fff}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:12px 22px;border-radius:999px;font-weight:500;font-size:14.5px;transition:.2s;text-decoration:none}
+.btn-p{background:linear-gradient(135deg,#5b6bff,#2a17ff);color:#fff;box-shadow:0 8px 30px rgba(42,23,255,.45),inset 0 1px 0 rgba(255,255,255,.25)}
+.btn-p:hover{transform:translateY(-1px);box-shadow:0 12px 40px rgba(42,23,255,.6)}
+.btn-g{border:1px solid rgba(255,255,255,.14);color:#e9eaf0;background:rgba(255,255,255,.03)}
+.btn-g:hover{background:rgba(255,255,255,.07)}
+/* hero */
+.ln-hero{position:relative;overflow:hidden;padding:110px 0 80px;text-align:center}
+.curt{position:absolute;inset:0;background:repeating-linear-gradient(90deg,rgba(29,7,255,.0) 0 26px,rgba(52,64,255,.38) 52px,rgba(29,7,255,.06) 78px,rgba(29,7,255,0) 104px);mask:linear-gradient(180deg,#000 0%,rgba(0,0,0,.85) 45%,transparent 92%);-webkit-mask:linear-gradient(180deg,#000 0%,rgba(0,0,0,.85) 45%,transparent 92%);animation:sway 9s ease-in-out infinite alternate}
+.curt::after{content:"";position:absolute;inset:0;background:radial-gradient(60% 50% at 50% 30%,rgba(2,4,16,.0),rgba(2,4,16,.85) 80%)}
+@keyframes sway{to{background-position:60px 0}}
+.ln-hero .ln-in{position:relative}
+.badge{display:inline-flex;align-items:center;gap:10px;padding:9px 18px;border-radius:999px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);font-size:14px;color:#c9cde0;backdrop-filter:blur(8px)}
+.badge i{width:7px;height:7px;border-radius:50%;background:#4a5cff;box-shadow:0 0 10px #4a5cff}
+.ln-hero h1{font-size:clamp(38px,6.4vw,76px);font-weight:300;letter-spacing:-1.5px;line-height:1.06;margin:26px auto 22px;max-width:920px;color:#fff}
+.ln-hero h1 em,.ttl em,.ln-foot h2 em{font-style:italic;font-weight:300;background:linear-gradient(90deg,#a9b3ff,#5b6bff);-webkit-background-clip:text;background-clip:text;color:transparent;padding-right:4px}
+.ln-hero p.lead{font-size:18px;color:#9da3b9;max-width:640px;margin:0 auto 34px;line-height:1.6}
+.cta{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+/* preview */
+.pv{margin:64px auto 0;max-width:980px;border-radius:22px;padding:10px;background:linear-gradient(180deg,rgba(74,92,255,.35),rgba(255,255,255,.04));box-shadow:0 40px 120px rgba(29,7,255,.35)}
+.pv-in{border-radius:16px;background:#050818;border:1px solid rgba(255,255,255,.06);overflow:hidden;text-align:left;display:grid;grid-template-columns:220px 1fr}
+.pv-side{border-right:1px solid rgba(255,255,255,.06);padding:16px 12px}
+.pv-side .r{display:flex;align-items:center;gap:9px;padding:7px 8px;border-radius:9px;font-size:12.5px;color:#c9cde0}
+.pv-side .r.a{background:rgba(74,92,255,.14)}
+.pv-side .r span{width:24px;height:24px;border-radius:7px;display:grid;place-items:center;font-size:12px;background:rgba(255,255,255,.05)}
+.pv-main{padding:18px 20px}
+.pv-q{margin-left:auto;max-width:72%;background:rgba(74,92,255,.18);border:1px solid rgba(74,92,255,.35);padding:10px 14px;border-radius:14px 14px 4px 14px;font-size:13px;margin-bottom:14px}
+.pv-a{border:1px solid rgba(255,255,255,.07);background:rgba(255,255,255,.02);border-radius:14px;padding:14px 16px;font-size:12.5px;color:#c9cde0}
+.pv-a h4{font-size:13px;color:#a9b3ff;margin:0 0 6px;font-weight:600}
+.pv-a .k{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:10px 0}
+.pv-a .k div{border:1px solid rgba(255,255,255,.07);border-radius:10px;padding:8px 10px}
+.pv-a .k b{display:block;color:#fff;font-size:12.5px}
+.pv-a .k small{color:#8b95ab}
+.typing::after{content:"▍";color:#5b6bff;animation:bl 1s steps(2) infinite}
+@keyframes bl{50%{opacity:0}}
+/* sections */
+.sec-b{padding:110px 0;position:relative;overflow:hidden}
+.sec-b.alt{background:#030513}
+.lbl{display:inline-flex;align-items:center;gap:9px;padding:8px 16px;border-radius:999px;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.03);font-size:12.5px;letter-spacing:1.6px;font-weight:600;color:#c9cde0}
+.lbl svg{color:#4a5cff}
+.hd{text-align:center;max-width:720px;margin:0 auto 56px}
+.ttl{font-size:clamp(30px,4.4vw,50px);font-weight:300;letter-spacing:-1px;line-height:1.12;margin:20px 0 14px;color:#fff}
+.hd p{color:#9da3b9;font-size:16.5px}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.card{position:relative;border-radius:20px;padding:26px;background:linear-gradient(180deg,rgba(255,255,255,.035),rgba(255,255,255,.01));border:1px solid rgba(255,255,255,.07);overflow:hidden;transition:.25s}
+.card:hover{border-color:rgba(74,92,255,.45);transform:translateY(-2px)}
+.card::before{content:"";position:absolute;width:220px;height:220px;border-radius:50%;background:radial-gradient(rgba(74,92,255,.25),transparent 70%);top:-110px;right:-80px;opacity:.0;transition:.3s}
+.card:hover::before{opacity:1}
+.card .ic{width:46px;height:46px;border-radius:13px;display:grid;place-items:center;font-size:20px;background:rgba(74,92,255,.12);border:1px solid rgba(74,92,255,.3);margin-bottom:18px}
+.card h3{font-size:18px;font-weight:500;color:#fff;margin-bottom:8px}
+.card p{color:#9da3b9;font-size:14.5px;line-height:1.6}
+.card.big{grid-column:span 2}
+.meter{margin-top:20px;display:flex;flex-direction:column;gap:9px}
+.meter div{display:flex;align-items:center;gap:10px;font-size:12.5px;color:#c9cde0}
+.meter span{flex:1;height:6px;border-radius:9px;background:rgba(255,255,255,.06);overflow:hidden}
+.meter span i{display:block;height:100%;border-radius:9px;background:linear-gradient(90deg,#2a17ff,#8f9bff)}
+.agc{padding:22px}
+.agc .av{width:44px;height:44px;border-radius:12px;font-size:20px;margin-bottom:14px}
+.agc h3{font-size:16px}
+.agc .pos{font-size:12px;color:#a9b3ff;margin-bottom:8px}
+.agc p{font-size:13.5px}
+/* stats */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid rgba(255,255,255,.07);border-radius:22px;overflow:hidden;background:rgba(255,255,255,.015)}
+.stats div{padding:34px 26px;border-right:1px solid rgba(255,255,255,.07)}
+.stats div:last-child{border-right:0}
+.stats b{display:block;font-size:46px;font-weight:300;color:#fff;letter-spacing:-1px}
+.stats b small{font-size:26px;color:#7f8cff}
+.stats span{color:#9da3b9;font-size:14px}
+/* process */
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;counter-reset:s}
+.step .no{font-size:13px;letter-spacing:2px;color:#7f8cff;font-weight:600;margin-bottom:16px;display:flex;align-items:center;gap:10px}
+.step .no::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,rgba(74,92,255,.5),transparent)}
+.step ul{margin:14px 0 0;list-style:none;display:flex;flex-direction:column;gap:7px}
+.step li{font-size:13.5px;color:#c9cde0;display:flex;gap:8px}
+.step li::before{content:"✓";color:#5b6bff}
+/* use cases */
+.uc{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.ucq{cursor:pointer}
+.ucq .tag{display:inline-block;font-size:11.5px;padding:3px 10px;border-radius:99px;background:rgba(74,92,255,.12);color:#a9b3ff;border:1px solid rgba(74,92,255,.3);margin-bottom:12px}
+.ucq h3{font-size:17px;line-height:1.45}
+.ucq .go{margin-top:14px;font-size:13px;color:#8f9bff}
+/* pricing */
+.tgl{display:inline-flex;padding:4px;border-radius:999px;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.03);margin-top:22px}
+.tgl button{padding:8px 18px;border-radius:999px;font-size:13.5px;color:#9da3b9}
+.tgl button.on{background:#fff;color:#050818;font-weight:600}
+.plan h3{font-size:20px}
+.plan .ph{font-size:13.5px;color:#9da3b9;min-height:42px}
+.plan .pr{font-size:30px;font-weight:300;color:#fff;margin:18px 0 4px}
+.plan .pr small{font-size:13px;color:#9da3b9}
+.plan ul{list-style:none;margin:18px 0 24px;display:flex;flex-direction:column;gap:9px}
+.plan li{font-size:14px;color:#c9cde0;display:flex;gap:9px}
+.plan li::before{content:"✓";color:#5b6bff;font-weight:700}
+.plan .btn{width:100%;justify-content:center}
+.plan.hot{border-color:rgba(74,92,255,.6);background:linear-gradient(180deg,rgba(74,92,255,.16),rgba(255,255,255,.01));box-shadow:0 30px 80px rgba(29,7,255,.25)}
+.plan .pop{position:absolute;top:18px;right:18px;font-size:11px;padding:4px 10px;border-radius:99px;background:#4a5cff;color:#fff;font-weight:600}
+/* gov */
+.gov{display:flex;gap:16px;align-items:flex-start;border-radius:18px;padding:22px 24px;border:1px solid rgba(74,92,255,.3);background:rgba(74,92,255,.06);margin-top:40px}
+.gov b{color:#fff}.gov p{color:#9da3b9;font-size:14px}
+/* footer */
+.ln-foot{padding:120px 0 40px;text-align:center;position:relative;overflow:hidden;background:#020410}
+.ln-foot::before{content:"";position:absolute;left:50%;top:40%;width:900px;height:500px;transform:translate(-50%,-50%);background:radial-gradient(closest-side,rgba(42,23,255,.35),transparent)}
+.ln-foot .ln-in{position:relative}
+.ln-foot h2{font-size:clamp(34px,5.4vw,64px);font-weight:300;letter-spacing:-1.4px;line-height:1.08;color:#fff;margin:22px 0 18px}
+.ln-foot p{color:#9da3b9;max-width:560px;margin:0 auto 30px;font-size:16.5px}
+.copy{margin-top:90px;padding-top:26px;border-top:1px solid rgba(255,255,255,.06);display:flex;justify-content:space-between;color:#6b7390;font-size:13px;flex-wrap:wrap;gap:10px}
+.rv{opacity:0;transform:translateY(18px);transition:opacity .7s,transform .7s}
+.rv.in{opacity:1;transform:none}
+@media(max-width:900px){
+  .ln-links{display:none}
+  .ln-nav .ln-in{justify-content:space-between}
+  .ln-hero{padding:80px 0 56px}
+  .ln-hero p.lead{font-size:16px}
+  .pv-in{grid-template-columns:1fr}.pv-side{display:none}
+  .pv-a .k{grid-template-columns:1fr}
+  .g3,.g4,.steps,.uc{grid-template-columns:1fr}
+  .g4.agents4{grid-template-columns:1fr 1fr}
+  .card.big{grid-column:auto}
+  .stats{grid-template-columns:1fr 1fr}
+  .stats div:nth-child(2){border-right:0}
+  .stats div:nth-child(-n+2){border-bottom:1px solid rgba(255,255,255,.07)}
+  .stats b{font-size:36px}
+  .sec-b{padding:76px 0}
+  .agc{padding:16px}.agc p{display:none}
+}
+
+.fwa{position:fixed;right:20px;bottom:20px;width:56px;height:56px;border-radius:50%;background:#25d366;display:grid;place-items:center;box-shadow:0 10px 30px rgba(37,211,102,.4);z-index:45;transition:.2s}
+.fwa:hover{transform:scale(1.07)}
+body:not(.landing) .fwa{display:none}
+.contact{margin-top:18px;color:#9da3b9;font-size:14px}.contact b{color:#fff}
+.note a{color:var(--gold2)}
+@media(max-width:900px){.nav-wa{display:none}}
+</style>
+</head>
+<body>
+<div id="land">
+<nav class="ln-nav"><div class="ln-in">
+  <a href="#" class="ln-logo"><span class="mark">D</span>Dewan AI</a>
+  <div class="ln-links"><button data-go="fitur">Keunggulan</button><button data-go="dewan">Anggota Dewan</button><button data-go="cara">Cara Kerja</button><button data-go="paket">Paket</button></div>
+  <a class="btn btn-g wa-l nav-wa" target="_blank" rel="noopener">Hubungi</a><a href="#rapat" class="btn btn-p">Coba Demo</a>
+</div></nav>
+
+<header class="ln-hero">
+  <div class="curt"></div>
+  <div class="ln-in">
+    <span class="badge"><i></i>8 AI Agent setingkat C-level dalam satu meja</span>
+    <h1>Masa Depan Keputusan CEO yang Lebih <em>Cerdas</em></h1>
+    <p class="lead">Dewan AI adalah dewan penasihat virtual untuk CEO dan owner: membedah setiap keputusan dari keuangan, sales, SDM, operasional sampai teknologi, lengkap dengan bantahan dan rencana aksi.</p>
+    <div class="cta"><a href="#rapat" class="btn btn-p">Mulai Rapat Dewan →</a><button class="btn btn-g" data-go="cara">Lihat Cara Kerja</button></div>
+    <div class="pv rv"><div class="pv-in">
+      <div class="pv-side">
+        <div class="r a"><span>👑</span>CEO Advisor</div><div class="r"><span>🧭</span>Strategy</div><div class="r"><span>💰</span>Finance</div><div class="r"><span>🤝</span>HR</div><div class="r"><span>📈</span>Sales</div><div class="r"><span>📣</span>Marketing</div><div class="r"><span>⚙️</span>Operations</div><div class="r"><span>🛰️</span>Technology</div>
+      </div>
+      <div class="pv-main">
+        <div class="pv-q">/rapat 12 dari 120 cabang rugi 3 kuartal berturut-turut. Tutup, gabung, atau perbaiki?</div>
+        <div class="pv-a">
+          <h4>⚡ Ringkasan 30 Detik</h4>
+          <div>Jangan tutup semua sekaligus. Pisahkan cabang yang rugi karena lokasi dan yang rugi karena eksekusi<span class="typing"></span></div>
+          <div class="k"><div><small>Pilihan A</small><b>Tutup 12 cabang</b></div><div><small>Pilihan B · disarankan</small><b>Perbaiki 7, gabung 5</b></div><div><small>Keyakinan</small><b>Sedang</b></div></div>
+          <h4>😈 Advokat Setan</h4><div>Perbaikan 90 hari bisa jadi cuma menunda kerugian kalau sewa naik lagi…</div>
+        </div>
+      </div>
+    </div></div>
+  </div>
+</header>
+
+<section class="sec-b alt" id="fitur"><div class="ln-in">
+  <div class="hd rv"><span class="lbl"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l1.8 6.2L20 10l-6.2 1.8L12 18l-1.8-6.2L4 10l6.2-1.8z"/><circle cx="19" cy="4" r="1.6"/><circle cx="5" cy="19" r="1.2"/></svg>KEUNGGULAN</span><h2 class="ttl">Kenapa CEO Butuh <em>Dewan AI?</em></h2><p>Keputusan besar jarang salah karena kurang pintar, tapi karena kurang sudut pandang. Dewan AI memastikan semua sisi ditimbang.</p></div>
+  <div class="g3">
+    <div class="card big rv"><div class="ic">⚖️</div><h3>Satu masalah, banyak kacamata</h3><p>Setiap pertanyaan dibedah oleh agent yang relevan, lalu ditimbang ketua dewan. Beda pendapat antar-direktur ditampilkan, tidak disembunyikan.</p>
+      <div class="meter"><div>Finance<span><i style="width:86%"></i></span></div><div>Sales<span><i style="width:72%"></i></span></div><div>Operations<span><i style="width:64%"></i></span></div></div></div>
+    <div class="card rv"><div class="ic">😈</div><h3>Advokat Setan</h3><p>Selalu ada yang membantah rekomendasi utama, supaya CEO tidak cuma dengar yang enak-enak saja.</p></div>
+    <div class="card rv"><div class="ic">📋</div><h3>Rencana aksi 7/30/90 hari</h3><p>Bukan teori: setiap rekomendasi berakhir dengan PIC, tenggat, KPI, dan titik stop.</p></div>
+    <div class="card rv"><div class="ic">🏢</div><h3>Paham konteks perusahaan</h3><p>Profil, target, dan tantangan perusahaan jadi bekal semua agent saat menganalisis.</p></div>
+    <div class="card rv"><div class="ic">🛡️</div><h3>CEO tetap pemegang keputusan</h3><p>AI memberi analisis dan rekomendasi. Keputusan final dan tindakan berisiko tetap di tangan manusia.</p></div>
+  </div>
+</div></section>
+
+<section class="sec-b" id="dewan"><div class="ln-in">
+  <div class="hd rv"><span class="lbl"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l1.8 6.2L20 10l-6.2 1.8L12 18l-1.8-6.2L4 10l6.2-1.8z"/><circle cx="19" cy="4" r="1.6"/><circle cx="5" cy="19" r="1.2"/></svg>ANGGOTA DEWAN</span><h2 class="ttl">Delapan Direktur, <em>Satu Meja</em></h2><p>Agent inti setingkat C-level yang bisa diaktifkan, dinonaktifkan, dan diatur gaya berpikirnya sesuai kebutuhan CEO.</p></div>
+  <div class="g4 agents4" id="lnAgents"></div>
+</div></section>
+
+<section class="sec-b alt"><div class="ln-in">
+  <div class="stats rv">
+    <div><b data-n="8">0</b><span>Agent C-level inti siap pakai</span></div>
+    <div><b data-n="48">0<small>+</small></b><span>Peran fungsional untuk dikembangkan</span></div>
+    <div><b data-n="5">0</b><span>Langkah analisis di setiap rapat</span></div>
+    <div><b data-n="24">0<small>/7</small></b><span>Siap diajak rapat kapan saja</span></div>
+  </div>
+</div></section>
+
+<section class="sec-b" id="cara"><div class="ln-in">
+  <div class="hd rv"><span class="lbl"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l1.8 6.2L20 10l-6.2 1.8L12 18l-1.8-6.2L4 10l6.2-1.8z"/><circle cx="19" cy="4" r="1.6"/><circle cx="5" cy="19" r="1.2"/></svg>CARA KERJA</span><h2 class="ttl">Sederhana, Tapi <em>Tajam</em></h2><p>Dari pertanyaan sampai rencana aksi dalam satu percakapan.</p></div>
+  <div class="steps">
+    <div class="card step rv"><div class="no">01</div><h3>Kenalkan perusahaan</h3><p>Isi profil: industri, skala, target tahun ini, dan tantangan terbesar.</p><ul><li>Industry context</li><li>Gaya keputusan CEO</li><li>Data & SOP (opsional)</li></ul></div>
+    <div class="card step rv"><div class="no">02</div><h3>Ajukan keputusan</h3><p>Ceritakan dengan bahasa biasa, atau pakai perintah cepat.</p><ul><li>/rapat untuk rapat lengkap</li><li>/bantah untuk uji ide</li><li>/risiko untuk peta risiko</li></ul></div>
+    <div class="card step rv"><div class="no">03</div><h3>Dapat rekomendasi</h3><p>Dewan menimbang, membantah, lalu menyusun rencana yang bisa langsung dijalankan.</p><ul><li>Tabel pilihan & risiko</li><li>Rencana aksi 7/30/90 hari</li><li>Daftar keputusan untuk CEO</li></ul></div>
+  </div>
+</div></section>
+
+<section class="sec-b alt"><div class="ln-in">
+  <div class="hd rv"><span class="lbl"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l1.8 6.2L20 10l-6.2 1.8L12 18l-1.8-6.2L4 10l6.2-1.8z"/><circle cx="19" cy="4" r="1.6"/><circle cx="5" cy="19" r="1.2"/></svg>CONTOH RAPAT</span><h2 class="ttl">Pertanyaan yang Biasa <em>Dibawa CEO</em></h2><p>Klik salah satu untuk langsung mencobanya di ruang rapat.</p></div>
+  <div class="uc">
+    <div class="card ucq rv" data-try="/rapat Kami mau buka 15 toko baru di Kalimantan & Sulawesi tahun depan, investasi sekitar Rp60 miliar. Layak nggak?"><span class="tag">Ekspansi</span><h3>“Buka 15 cabang baru di luar Jawa dengan investasi Rp60 miliar. Layak nggak?”</h3><div class="go">Bawa ke rapat →</div></div>
+    <div class="card ucq rv" data-try="/rapat 12 dari 120 cabang kami rugi 3 kuartal berturut-turut. Tutup, gabung, atau perbaiki?"><span class="tag">Efisiensi</span><h3>“12 cabang rugi tiga kuartal berturut-turut. Tutup, gabung, atau perbaiki?”</h3><div class="go">Bawa ke rapat →</div></div>
+    <div class="card ucq rv" data-try="/bantah Rencana kita ganti 60% staf admin back-office dengan otomatisasi AI dalam 6 bulan."><span class="tag">Transformasi</span><h3>“Kita mau ganti 60% staf admin dengan otomatisasi AI dalam 6 bulan.”</h3><div class="go">Uji dengan /bantah →</div></div>
+    <div class="card ucq rv" data-try="/rencana Naikkan margin kotor dari 18% ke 21% dalam 12 bulan tanpa menaikkan harga jual secara signifikan."><span class="tag">Profitabilitas</span><h3>“Naikkan margin kotor dari 18% ke 21% dalam 12 bulan tanpa naik harga.”</h3><div class="go">Susun dengan /rencana →</div></div>
+  </div>
+</div></section>
+
+<section class="sec-b" id="paket"><div class="ln-in">
+  <div class="hd rv"><span class="lbl"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l1.8 6.2L20 10l-6.2 1.8L12 18l-1.8-6.2L4 10l6.2-1.8z"/><circle cx="19" cy="4" r="1.6"/><circle cx="5" cy="19" r="1.2"/></svg>PAKET</span><h2 class="ttl">Mulai Kecil, <em>Tumbuh Bersama</em></h2><p>Implementasi bertahap sesuai kebutuhan perusahaan. Harga disesuaikan dengan skala dan cakupan.</p></div>
+  <div class="g3">
+    <div class="card plan rv"><h3>Pilot</h3><div class="ph">Uji coba di level direksi selama satu periode.</div><div class="pr">Sesuai skala <small>· hubungi kami</small></div><ul><li>8 agent inti</li><li>1 profil perusahaan</li><li>Perintah cepat & rapat dewan</li><li>Sesi onboarding</li></ul><a class="btn btn-g wa-l" target="_blank" rel="noopener">Ajukan pilot via WA</a></div>
+    <div class="card plan hot rv"><span class="pop">Disarankan</span><h3>Growth</h3><div class="ph">Untuk perusahaan yang ingin Dewan AI jadi rutinitas rapat.</div><div class="pr">Sesuai skala <small>· hubungi kami</small></div><ul><li>Semua di paket Pilot</li><li>Agent spesialis industri</li><li>Knowledge base: dokumen, SOP, laporan</li><li>Kustom gaya berpikir tiap agent</li></ul><a class="btn btn-p wa-l" target="_blank" rel="noopener">Konsultasi via WA</a></div>
+    <div class="card plan rv"><h3>Enterprise</h3><div class="ph">Untuk grup usaha dan korporasi dengan banyak unit.</div><div class="pr">Custom</div><ul><li>Custom agent tak terbatas</li><li>Hak akses per divisi</li><li>Integrasi data internal</li><li>Pendampingan khusus</li></ul><a class="btn btn-g wa-l" target="_blank" rel="noopener">Hubungi kami</a></div>
+  </div>
+  <div class="gov rv"><div class="ic" style="font-size:22px">🛡️</div><div><b>Prinsip tata kelola.</b> <p>Dewan AI berfungsi sebagai mitra analisis dan pemberi rekomendasi. Keputusan final, persetujuan transaksi, nasihat profesional yang memerlukan lisensi, serta tindakan berisiko tetap berada pada manusia yang berwenang.</p></div></div>
+</div></section>
+
+<footer class="ln-foot"><div class="ln-in">
+  <span class="lbl"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l1.8 6.2L20 10l-6.2 1.8L12 18l-1.8-6.2L4 10l6.2-1.8z"/><circle cx="19" cy="4" r="1.6"/><circle cx="5" cy="19" r="1.2"/></svg>DEWAN AI</span>
+  <h2>Ajak dewan Anda <em>rapat</em><br>sebelum keputusan besar berikutnya</h2>
+  <p>Mikir lebih jernih, putuskan lebih tepat, eksekusi lebih cepat, bersama delapan direktur AI yang siap kapan saja.</p>
+  <div class="cta"><a href="#rapat" class="btn btn-p">Mulai Rapat Dewan →</a><a class="btn btn-g wa-l" target="_blank" rel="noopener">💬 WhatsApp Pak Ade</a></div>
+  <div class="contact">Pak Ade Wahyudi · WhatsApp <b>0813-1307-9809</b></div>
+  <div class="copy"><span>© 2026 Dewan AI · Dewan Penasihat CEO</span><span>Demo produk · Jawaban AI perlu diverifikasi</span></div>
+</div></footer>
+</div>
+<div class="app">
+  <aside id="side">
+    <div class="brand"><a href="#" class="mark" title="Beranda">D</a><div><b>Dewan AI</b><small>Dewan Penasihat CEO</small></div></div>
+    <button class="co" id="coBtn"><div class="l">Perusahaan</div><div class="n" id="coName"></div><div class="s" id="coSub"></div></button>
+    <div class="sec"><span>Dewan Penasihat</span><span id="actCount"></span></div>
+    <div class="agents" id="agents"></div>
+    <div class="foot">Keputusan final tetap di tangan CEO. AI memberi analisis & rekomendasi.</div>
+  </aside>
+
+  <main>
+    <div class="top">
+      <button class="ib menu-btn" id="menuBtn">☰</button>
+      <div><h1 id="title">Rapat Dewan</h1><div class="sub" id="subtitle">Semua agent aktif ikut menimbang</div></div>
+      <div class="sp"></div>
+      <div class="modes"><button data-m="rapat" class="on">Rapat Dewan</button><button data-m="agent">1 Agent</button></div>
+      <button class="ib" id="newBtn">+ Sesi baru</button>
+    </div>
+
+    <div class="feed" id="feed"><div class="wrap" id="wrap"></div></div>
+
+    <div class="comp">
+      <div class="box">
+        <textarea id="inp" placeholder="Ceritakan keputusan atau masalah yang lagi dipikirin…" rows="2"></textarea>
+        <div class="brow">
+          <button class="cmd" data-c="/rapat ">/rapat</button>
+          <button class="cmd" data-c="/bantah ">/bantah</button>
+          <button class="cmd" data-c="/rencana ">/rencana</button>
+          <button class="cmd" data-c="/risiko ">/risiko</button>
+          <button class="cmd" data-c="/ringkas">/ringkas</button>
+          <span class="target" id="target"></span>
+          <button class="send" id="send">Kirim ➜</button>
+        </div>
+      </div>
+      <div class="note" id="demoNote">Dewan AI · Jawaban AI bisa keliru. Verifikasi angka & konsultasikan ke profesional untuk hukum, pajak, dan investasi.</div>
+    </div>
+  </main>
+</div>
+
+<!-- company modal -->
+<div class="ov" id="coOv"><div class="dlg">
+  <h3>Profil Perusahaan</h3>
+  <div class="d">Level 1 – Industry Context. Semua agent memakai konteks ini saat menganalisis.</div>
+  <div class="f"><label>Nama perusahaan</label><input id="cName"></div>
+  <div class="g2">
+    <div class="f"><label>Industri</label><select id="cInd"></select></div>
+    <div class="f"><label>Skala</label><select id="cScale"><option>50–200 karyawan</option><option>200–1.000 karyawan</option><option>1.000–5.000 karyawan</option><option>> 5.000 karyawan</option></select></div>
+  </div>
+  <div class="f"><label>Model bisnis & produk utama</label><input id="cModel"></div>
+  <div class="f"><label>Target utama tahun ini</label><input id="cTarget"></div>
+  <div class="f"><label>Tantangan terbesar saat ini</label><textarea id="cChal"></textarea></div>
+  <div class="f"><label>Gaya keputusan CEO</label><select id="cStyle"><option>Cepat & berani ambil risiko</option><option>Seimbang</option><option>Hati-hati & berbasis data</option></select></div>
+  <div class="dact"><button class="sec2" data-close>Batal</button><button class="pri" id="coSave">Simpan</button></div>
+</div></div>
+
+<!-- agent modal -->
+<div class="ov" id="agOv"><div class="dlg">
+  <h3 id="agTitle">Atur Agent</h3>
+  <div class="d">Level 3 – Custom Competency. Sesuaikan perilaku agent dengan kebutuhan CEO.</div>
+  <div class="g2">
+    <div class="f"><label>Nama agent</label><input id="aName"></div>
+    <div class="f"><label>Jabatan</label><input id="aPos"></div>
+  </div>
+  <div class="f"><label>Kompetensi</label><input id="aComp"></div>
+  <div class="f"><label>Tanggung jawab tambahan</label><textarea id="aResp" placeholder="Misal: selalu cek dampak ke margin per cabang"></textarea></div>
+  <div class="g2">
+    <div class="f"><label>Gaya berpikir</label><select id="aThink"><option>Analytical</option><option>Critical</option><option>Strategic</option><option>Creative</option></select></div>
+    <div class="f"><label>Gaya komunikasi</label><select id="aComm"><option>Casual</option><option>Direct</option><option>Consultative</option><option>Formal</option></select></div>
+  </div>
+  <div class="f"><label>Format output favorit</label><select id="aOut"><option>Recommendation</option><option>Table</option><option>Action Plan</option><option>Report</option></select></div>
+  <div class="dact"><button class="sec2" data-close>Batal</button><button class="sec2" id="agAsk">Tanya agent ini</button><button class="pri" id="agSave">Simpan</button></div>
+</div></div>
+
+<a class="fwa wa-l" target="_blank" rel="noopener" title="WhatsApp Pak Ade Wahyudi"><svg viewBox="0 0 24 24" width="26" height="26" fill="#fff"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2c-1.5 0-3-.4-4.3-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.3-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.9 11.9 0 0 0 4.6 4c1.7.7 2.4.8 3.2.7a2.8 2.8 0 0 0 1.8-1.3 2.3 2.3 0 0 0 .2-1.3c-.1-.1-.3-.2-.5-.3z"/></svg></a>
+<div class="toast" id="toast"></div>
+
+<script>
+const AGENTS=[
+ {id:"ceo",name:"CEO Advisor",pos:"Executive Advisor · Ketua Dewan",comp:"Leadership, strategic thinking, decision making",out:"Rekomendasi keputusan strategis",ico:"👑",col:"#3a2e10",think:"Strategic",comm:"Casual",fmt:"Recommendation",lead:true},
+ {id:"strategy",name:"Strategy Agent",pos:"Chief Strategy Officer",comp:"Corporate strategy, business model, expansion",out:"Business strategy & roadmap",ico:"🧭",col:"#14304a",think:"Strategic",comm:"Casual",fmt:"Action Plan"},
+ {id:"finance",name:"Finance Agent",pos:"Chief Financial Officer",comp:"Financial planning, budgeting, cashflow, ROI",out:"Financial report & analysis",ico:"💰",col:"#123a2c",think:"Analytical",comm:"Direct",fmt:"Table"},
+ {id:"hr",name:"HR Agent",pos:"Chief Human Resources Officer",comp:"HR strategy, talenta, KPI/OKR, budaya",out:"HR strategy",ico:"🤝",col:"#3a1a30",think:"Analytical",comm:"Consultative",fmt:"Recommendation"},
+ {id:"sales",name:"Sales Agent",pos:"Chief Sales Officer",comp:"Sales strategy, pipeline, konversi, pricing",out:"Sales growth strategy",ico:"📈",col:"#3a2412",think:"Strategic",comm:"Direct",fmt:"Action Plan"},
+ {id:"marketing",name:"Marketing Agent",pos:"Chief Marketing Officer",comp:"Brand, kampanye, digital, riset pasar",out:"Marketing strategy",ico:"📣",col:"#2c1a40",think:"Creative",comm:"Casual",fmt:"Recommendation"},
+ {id:"ops",name:"Operations Agent",pos:"Chief Operating Officer",comp:"Efisiensi, SOP, supply chain, kualitas",out:"Operational improvement plan",ico:"⚙️",col:"#26303d",think:"Analytical",comm:"Direct",fmt:"Action Plan"},
+ {id:"tech",name:"Technology Agent",pos:"Chief Technology Officer",comp:"Tech strategy, transformasi digital, AI, data",out:"Technology roadmap",ico:"🛰️",col:"#122f3a",think:"Critical",comm:"Casual",fmt:"Table"}
+];
+const INDUSTRIES=["Retail","Manufacturing","Property Developer","Construction","F&B","Healthcare","Hospitality","Education","Technology / SaaS","Trading & Distribution","Otomotif","Perbankan & Keuangan"];
+let company={name:"PT Nusantara Maju Sejahtera",ind:"Retail",scale:"1.000–5.000 karyawan",model:"Jaringan 120 toko ritel kebutuhan rumah tangga di Jawa & Sumatra + toko online",target:"Omzet naik 15%, margin kotor dari 18% ke 21%",chal:"Biaya sewa & gaji naik, kompetisi e-commerce, beberapa cabang rugi",style:"Seimbang"};
+let state={mode:"rapat",agent:"finance",on:Object.fromEntries(AGENTS.map(a=>[a.id,true])),hist:[],busy:false};
+try{const s=JSON.parse(localStorage.getItem("kc_demo")||"null");if(s){company=s.company||company;if(s.on)state.on=s.on;if(s.ag)s.ag.forEach(x=>{const a=AGENTS.find(y=>y.id===x.id);if(a)Object.assign(a,x)})}}catch(e){}
+function persist(){try{localStorage.setItem("kc_demo",JSON.stringify({company,on:state.on,ag:AGENTS.map(({id,name,pos,comp,think,comm,fmt,resp})=>({id,name,pos,comp,think,comm,fmt,resp}))}))}catch(e){}}
+
+const $=s=>document.querySelector(s);
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+function toast(t){const e=$("#toast");e.textContent=t;e.classList.add("on");clearTimeout(e._t);e._t=setTimeout(()=>e.classList.remove("on"),1800)}
+const active=()=>AGENTS.filter(a=>state.on[a.id]);
+
+function renderSide(){
+  $("#coName").textContent=company.name;
+  $("#coSub").textContent=company.ind+" · "+company.scale;
+  $("#actCount").textContent=active().length+"/8 aktif";
+  $("#agents").innerHTML=AGENTS.map(a=>`<div class="ag ${state.on[a.id]?"":"off"} ${state.mode==="agent"&&state.agent===a.id?"sel":""}" data-id="${a.id}">
+    <div class="av" style="background:${a.col}">${a.ico}</div>
+    <div class="t"><b>${esc(a.name)}</b><span>${esc(a.pos)}</span></div>
+    ${a.lead?"":`<div class="tog ${state.on[a.id]?"on":""}" data-tog="${a.id}" title="Aktif/nonaktif"></div>`}
+  </div>`).join("");
+}
+function renderTop(){
+  document.querySelectorAll(".modes button").forEach(b=>b.classList.toggle("on",b.dataset.m===state.mode));
+  if(state.mode==="rapat"){$("#title").textContent="Rapat Dewan";$("#subtitle").textContent=active().length+" agent aktif ikut menimbang";$("#target").innerHTML="Ke: <b>Dewan ("+active().length+")</b>"}
+  else{const a=AGENTS.find(x=>x.id===state.agent);$("#title").textContent=a.ico+" "+a.name;$("#subtitle").textContent=a.pos+" · "+a.think+" · "+a.comm;$("#target").innerHTML="Ke: <b>"+esc(a.name)+"</b>"}
+}
+function renderWelcome(){
+  $("#wrap").innerHTML=`<div class="hero">
+    <span class="pill">● Demo · ${esc(company.name)}</span>
+    <h2>Mikir lebih jernih. <em>Putuskan lebih tepat.</em><br>Eksekusi lebih cepat.</h2>
+    <p>Delapan AI Agent setingkat C-level siap jadi teman mikir CEO. Ceritakan keputusan yang lagi dipertimbangkan, dewan akan membedahnya dari keuangan, sales, SDM sampai teknologi, lengkap dengan bantahan dan rencana aksi.</p>
+  </div>
+  <div class="board">${AGENTS.map(a=>`<div class="bc" data-pick="${a.id}"><div class="av" style="background:${a.col}">${a.ico}</div><b>${esc(a.name)}</b><span>${esc(a.out)}</span></div>`).join("")}</div>
+  <div class="qs">
+    <button class="q" data-q="/rapat Kami mau buka 15 toko baru di Kalimantan & Sulawesi tahun depan, investasi sekitar Rp60 miliar. Layak nggak?"><code>/rapat</code> Buka 15 toko baru di luar Jawa, investasi Rp60 M. Layak?</button>
+    <button class="q" data-q="/rapat 12 dari 120 cabang kami rugi 3 kuartal berturut-turut. Tutup, gabung, atau perbaiki?"><code>/rapat</code> 12 cabang rugi 3 kuartal. Tutup, gabung, atau perbaiki?</button>
+    <button class="q" data-q="/bantah Rencana kita ganti 60% staf admin back-office dengan otomatisasi AI dalam 6 bulan."><code>/bantah</code> Ganti 60% staf admin dengan otomatisasi AI.</button>
+    <button class="q" data-q="/rencana Naikkan margin kotor dari 18% ke 21% dalam 12 bulan tanpa menaikkan harga jual secara signifikan."><code>/rencana</code> Margin kotor 18% → 21% dalam 12 bulan.</button>
+  </div>`;
+}
+function boardText(){
+  return AGENTS.map(a=>`- ${a.ico} ${a.name} (${a.pos}) — kompetensi: ${a.comp}; gaya berpikir: ${a.think}; gaya komunikasi: ${a.comm}; format favorit: ${a.fmt}${a.resp?"; tanggung jawab tambahan: "+a.resp:""}${state.on[a.id]?"":" [NONAKTIF — jangan dipanggil]"}`).join("\n");
+}
+function systemText(){
+  const one=state.mode==="agent"?AGENTS.find(x=>x.id===state.agent):null;
+  return `# PERAN KAMU
+Kamu adalah "Dewan AI – Dewan Penasihat CEO": tim AI Agent setingkat C-level yang bantu CEO perusahaan besar mikir lebih jernih, ambil keputusan lebih tepat, dan eksekusi lebih cepat. Kamu mitra mikir, bukan pengambil keputusan. Keputusan final, persetujuan transaksi, dan hal yang butuh lisensi profesi tetap di tangan manusia berwenang.
+
+# KONTEKS PERUSAHAAN (Level 1)
+- Nama: ${company.name}
+- Industri: ${company.ind}
+- Skala: ${company.scale}
+- Model bisnis: ${company.model}
+- Target tahun ini: ${company.target}
+- Tantangan terbesar: ${company.chal}
+- Gaya keputusan CEO: ${company.style}
+Catatan: ini data demo. Kalau butuh angka yang tidak ada, pakai asumsi wajar industri ${company.ind} di Indonesia, tandai jelas sebagai "asumsi", dan sebutkan data apa yang perlu diminta.
+
+# ANGGOTA DEWAN (Level 2 & 3)
+${boardText()}
+Peran tambahan selalu aktif: 😈 Advokat Setan — membantah rekomendasi utama dengan argumen terkuat.
+
+${one?`# MODE: TANYA 1 AGENT
+Yang menjawab HANYA ${one.ico} ${one.name} (${one.pos}). Jawab dari kacamata bidangnya, sesuai gaya berpikir ${one.think}, gaya komunikasi ${one.comm}, format favorit ${one.fmt}. Boleh sebut kalau perlu melibatkan agent lain, tapi jangan jawab atas nama mereka. Buka jawaban dengan baris "**${one.ico} ${one.name}:**".`:`# MODE: RAPAT DEWAN
+Untuk pertanyaan strategis, ikuti alur:
+1. Kalau info penting benar-benar kurang, boleh ajukan maks 3 pertanyaan — TAPI tetap lanjutkan analisis pakai asumsi yang ditulis jelas (ini demo, jangan berhenti cuma bertanya).
+2. Panggil 3–5 agent aktif yang paling relevan (jangan semua). Masing-masing 2–4 poin singkat dari bidangnya. Tampilkan beda pendapat antar-agent kalau ada.
+3. Susun 2–3 pilihan dalam tabel: Pilihan | Untung | Risiko | Perkiraan biaya & waktu | Dampak ke angka utama.
+4. 😈 Advokat Setan: 2–3 bantahan terkuat ke pilihan unggulan, lalu apakah itu mengubah rekomendasi.
+5. 👑 Rekomendasi CEO Advisor: 1 rekomendasi jelas + alasan, tingkat keyakinan (Tinggi/Sedang/Rendah), tabel rencana aksi (Aksi | PIC jabatan | Tenggat 7/30/90 hari | KPI), dan kondisi "stop/evaluasi ulang".
+
+FORMAT (markdown):
+## ⚡ Ringkasan 30 Detik
+## 🗣️ Kata Dewan  (sub-bagian per agent: **ikon Nama:**)
+## ⚖️ Pilihan
+## 😈 Advokat Setan
+## 👑 Rekomendasi & Rencana Aksi
+## ✅ Yang Perlu Diputuskan CEO
+Untuk pertanyaan ringan / obrolan biasa, jawab singkat langsung tanpa format lengkap.`}
+
+# PERINTAH CEPAT
+/rapat = rapat dewan lengkap. /tanya [nama agent] [pertanyaan] = hanya agent itu yang menjawab. /cepat = jawaban singkat. /bantah = Advokat Setan membedah kelemahan ide (plus cara menambalnya). /rencana = rencana aksi 7/30/90 hari dalam tabel. /risiko = tabel risiko (Risiko | Kemungkinan | Dampak | Mitigasi | PIC). /ringkas = rangkum keputusan & tugas dari obrolan ini.
+
+# GAYA
+Bahasa Indonesia santai tapi sopan, kayak partner bisnis senior yang dipercaya. Langsung ke inti, hindari jargon (kalau terpaksa, jelaskan singkat). Jujur: kalau ide CEO berisiko, bilang terus terang plus alternatifnya. Pakai angka; tandai perkiraan. Jangan mengarang fakta spesifik perusahaan. Untuk hukum, pajak, audit, investasi, dan keputusan soal orang (PHK, sanksi): kasih analisis tapi sarankan konfirmasi ke profesional/HR/legal. Panjang jawaban rapat: padat, maksimal kira-kira 700 kata.`;
+}
+
+let sampleP=window.claude?claude.use("sample"):Promise.resolve(null);
+let sampleFn=null;sampleP.then(s=>{sampleFn=s}).catch(()=>{});
+
+function addMe(t){const d=document.createElement("div");d.className="msg me";d.innerHTML=`<div class="bub">${esc(t)}</div>`;$("#wrap").appendChild(d);scroll()}
+function addAns(){
+  const d=document.createElement("div");d.className="msg";
+  const who=state.mode==="rapat"?`<span class="chip">👑 Rapat Dewan</span>`+active().filter(a=>!a.lead).map(a=>`<span class="chip">${a.ico} ${esc(a.name.replace(" Agent",""))}</span>`).join(""):(()=>{const a=AGENTS.find(x=>x.id===state.agent);return `<span class="chip">${a.ico} ${esc(a.name)}</span><span>${esc(a.pos)}</span>`})();
+  d.innerHTML=`<div class="ans"><div class="who">${who}</div><div class="md"><div class="dots"><span></span><span></span><span></span> <small style="color:var(--mut)">Dewan sedang menimbang…</small></div></div></div>`;
+  $("#wrap").appendChild(d);scroll();return d.querySelector(".md");
+}
+function scroll(){const f=$("#feed");f.scrollTop=f.scrollHeight}
+function md(t){try{if(window.marked)return marked.parse(t,{breaks:true})}catch(e){}return miniMd(t)}
+function inl(s){return esc(s).replace(/\*\*(.+?)\*\*/g,"<strong>$1</strong>").replace(/(^|[^*])\*([^*\n]+)\*/g,"$1<em>$2</em>").replace(/(^|\W)_([^_\n]+)_(?=\W|$)/g,"$1<em>$2</em>").replace(/`([^`]+)`/g,"<code>$1</code>")}
+function miniMd(t){
+  const L=t.split("\n");let h="",i=0;
+  const row=l=>l.trim().replace(/^\||\|$/g,"").split("|").map(c=>c.trim());
+  while(i<L.length){
+    let l=L[i];
+    if(!l.trim()){i++;continue}
+    let m=l.match(/^(#{1,4})\s+(.*)/);if(m){h+=`<h${Math.min(m[1].length+1,4)}>${inl(m[2])}</h${Math.min(m[1].length+1,4)}>`;i++;continue}
+    if(/^\s*(-{3,}|\*{3,})\s*$/.test(l)){h+="<hr>";i++;continue}
+    if(l.trim().startsWith("|")&&L[i+1]&&/^\s*\|?\s*:?-{2,}/.test(L[i+1])){
+      const head=row(l);i+=2;let b="";
+      while(i<L.length&&L[i].trim().startsWith("|")){b+="<tr>"+row(L[i]).map(c=>`<td>${inl(c)}</td>`).join("")+"</tr>";i++}
+      h+=`<table><thead><tr>${head.map(c=>`<th>${inl(c)}</th>`).join("")}</tr></thead><tbody>${b}</tbody></table>`;continue}
+    if(/^\s*([-*•]|\d+[.)])\s+/.test(l)){
+      const ol=/^\s*\d/.test(l);let b="";
+      while(i<L.length&&/^\s*([-*•]|\d+[.)])\s+/.test(L[i])){b+="<li>"+inl(L[i].replace(/^\s*([-*•]|\d+[.)])\s+/,""))+"</li>";i++}
+      h+=ol?`<ol>${b}</ol>`:`<ul>${b}</ul>`;continue}
+    if(/^>\s?/.test(l)){let b=[];while(i<L.length&&/^>\s?/.test(L[i])){b.push(inl(L[i].replace(/^>\s?/,"")));i++}h+=`<blockquote>${b.join("<br>")}</blockquote>`;continue}
+    let p=[];while(i<L.length&&L[i].trim()&&!/^(#{1,4}\s|\s*\||\s*([-*•]|\d+[.)])\s+|>)/.test(L[i])){p.push(inl(L[i]));i++}
+    if(p.length)h+=`<p>${p.join("<br>")}</p>`;else{h+=`<p>${inl(l)}</p>`;i++}
+  }
+  return h;
+}
+
+async function send(text){
+  text=(text||$("#inp").value).trim();if(!text||state.busy)return;
+  if($("#wrap .hero"))$("#wrap").innerHTML="";
+  $("#inp").value="";autosize();addMe(text);
+  const box=addAns();state.busy=true;$("#send").disabled=true;
+  const msgs=state.hist.concat([{role:"user",content:text}]);
+  const input=[{role:"user",content:systemText()+"\n\n---\nPESAN PERTAMA CEO:\n"+msgs[0].content}].concat(msgs.slice(1));
+  let s=sampleFn;if(!s){try{s=await sampleP}catch(e){s=null}}
+  if(!s){await new Promise(r=>setTimeout(r,900));const fb=fallback(text);box.innerHTML=md(fb);finish(box,text,fb);return}
+  let out="";
+  try{
+    const r=await s(input,{cache:false,modelTier:"default",onText:({text})=>{out=text;box.innerHTML=md(text);scroll()}});
+    out=r.text||out;box.innerHTML=md(out);
+    state.hist.push({role:"user",content:text},{role:"assistant",content:out});
+  }catch(e){
+    if(e&&e.text){out=e.text;box.innerHTML=md(out)}
+    else box.innerHTML=md(e&&e.code==="rate_limited"?"_Dewan lagi kebanyakan permintaan. Tunggu sebentar lalu coba lagi._":e&&e.code==="not_granted"?fallback(text):"_Maaf, dewan gagal menjawab. Coba kirim ulang._");
+  }
+  finish(box,text,out);
+}
+function finish(box,text,out){
+  state.busy=false;$("#send").disabled=false;
+  const a=document.createElement("div");a.className="acts";
+  a.innerHTML=`<button data-a="copy">Salin</button><button data-a="bantah">😈 Bantah ini</button><button data-a="rencana">📋 Jadikan rencana aksi</button>`;
+  a.addEventListener("click",async e=>{const k=e.target.dataset.a;if(!k)return;
+    if(k==="copy"){try{await navigator.clipboard.writeText(out||box.innerText);toast("Tersalin")}catch(_){toast("Gagal menyalin")}}
+    if(k==="bantah")send("/bantah rekomendasi terakhir dewan di atas");
+    if(k==="rencana")send("/rencana dari rekomendasi terakhir di atas, lengkap dengan PIC, tenggat, dan KPI");
+  });
+  box.parentNode.appendChild(a);scroll();
+}
+/* ===== jawaban contoh (dipakai saat AI langsung tidak tersedia) ===== */
+const WA="6281313079809",WA_TXT="0813-1307-9809";
+const wa=m=>"https://wa.me/"+WA+"?text="+encodeURIComponent(m||"Halo Pak Ade, saya tertarik dengan Dewan AI (Dewan Penasihat CEO). Boleh minta demo?");
+const DEMO={
+"Kami mau buka 15 toko":`## ⚡ Ringkasan 30 Detik
+Ekspansi ke Kalimantan & Sulawesi masuk akal, tapi **jangan langsung 15 toko**. Mulai dengan **4–5 toko pilot di 2 kota terkuat**, ukur 6 bulan, baru lanjut. Alasannya: biaya logistik luar Jawa bisa menggerus margin 2–4 poin, dan Rp60 miliar terlalu besar untuk dikunci sebelum ada bukti.
+
+## 🗣️ Kata Dewan
+**💰 Finance Agent:** Rp60 M ≈ Rp4 M per toko. Dengan margin kotor 18%, tiap toko butuh omzet ±Rp1,1 M/bulan untuk balik modal dalam 3–4 tahun (perkiraan). Cek dulu: cashflow kuat nggak kalau 30% toko baru di bawah target?
+**📈 Sales Agent:** Permintaan ada, kompetitor ritel modern di kota lapis 2 masih sedikit. Tapi daya beli & kebiasaan belanja beda: produk lokal harus masuk planogram.
+**⚙️ Operations Agent:** Ini titik paling rawan. Tanpa gudang regional, biaya kirim dari Jawa + waktu tempuh kapal bikin stok sering kosong. Butuh 1 hub di Balikpapan atau Makassar.
+**🤝 HR Agent:** Kepala toko berpengalaman susah dicari di sana. Siapkan 5–8 orang dari cabang Jawa untuk rotasi 6–12 bulan.
+
+## ⚖️ Pilihan
+| Pilihan | Untung | Risiko | Biaya & waktu |
+|---|---|---|---|
+| A. Langsung 15 toko | Cepat kuasai pasar | Modal terkunci, logistik belum siap | Rp60 M · 12 bln |
+| **B. Pilot 5 toko + 1 hub** | Belajar dulu, risiko terukur | Kompetitor bisa masuk duluan | ±Rp24 M · 6 bln |
+| C. Tunda, fokus perbaiki cabang rugi | Cashflow aman | Kehilangan momentum | Rendah |
+
+## 😈 Advokat Setan
+"Pilot" sering jadi alasan untuk ragu-ragu. Kalau pemain lain buka duluan di lokasi terbaik, lokasi itu hilang selamanya. **Jawaban:** amankan dulu opsi sewa 10 lokasi lain (uang tanda jadi kecil) sambil pilot berjalan. Rekomendasi tetap B.
+
+## 👑 Rekomendasi & Rencana Aksi
+**Pilihan B** · keyakinan: **Sedang**. Naik jadi Tinggi kalau studi lokasi menunjukkan sewa ≤ 8% dari omzet.
+| Aksi | PIC | Tenggat | KPI |
+|---|---|---|---|
+| Studi kelayakan 2 kota & 10 lokasi | CSO | 7 hari | Shortlist lokasi |
+| Hitung skenario cashflow 3 kondisi | CFO | 30 hari | Payback < 4 thn |
+| Siapkan hub logistik regional | COO | 90 hari | Stok tersedia ≥ 95% |
+| Buka 5 toko pilot | COO + CHRO | 6 bln | Omzet/toko ≥ target 80% |
+
+**Stop / evaluasi ulang** kalau setelah 6 bulan rata-rata toko pilot < 70% target omzet.
+
+## ✅ Yang Perlu Diputuskan CEO
+- Batas maksimal investasi fase pilot
+- Kota pilot pertama: Balikpapan, Makassar, atau Samarinda
+- Kriteria lanjut ke 10 toko berikutnya`,
+"12 dari 120 cabang":`## ⚡ Ringkasan 30 Detik
+Jangan tutup semua sekaligus. Pisahkan dulu cabang yang **rugi karena lokasi** (sulit diperbaiki) dan yang **rugi karena eksekusi** (bisa diperbaiki). Perkiraan dari pola umum ritel: ±5 cabang ditutup/digabung, ±7 diberi program perbaikan 90 hari.
+
+## 🗣️ Kata Dewan
+**💰 Finance Agent:** Hitung kontribusi tiap cabang sebelum biaya pusat. Cabang yang masih menutup biaya langsungnya jangan buru-buru ditutup, karena menutupnya justru menaikkan beban pusat per cabang lain.
+**⚙️ Operations Agent:** Cek tiga hal di 12 cabang itu: stok kosong, jam ramai vs jadwal staf, dan susut barang. Biasanya 2 dari 3 ini yang bikin rugi.
+**📈 Sales Agent:** Bandingkan tren omzet vs kompetitor terdekat. Kalau omzet turun karena minimarket baru buka di depan, itu masalah lokasi.
+**🤝 HR Agent:** Penutupan menyentuh karyawan. Prioritaskan mutasi ke cabang terdekat, ikuti aturan ketenagakerjaan, dan libatkan HR & legal sejak awal.
+
+## ⚖️ Pilihan
+| Pilihan | Untung | Risiko | Dampak |
+|---|---|---|---|
+| A. Tutup 12 cabang | Rugi langsung berhenti | Biaya penutupan, citra, karyawan | Cepat tapi mahal |
+| **B. Pilah: perbaiki 7, tutup/gabung 5** | Selamatkan yang masih bisa | Butuh disiplin evaluasi | Seimbang |
+| C. Pertahankan semua | Tanpa gejolak | Rugi terus menggerus laba | Berbahaya |
+
+## 😈 Advokat Setan
+Program perbaikan 90 hari bisa cuma menunda kerugian, apalagi kalau sewa naik di perpanjangan berikutnya. **Jawaban:** tetapkan target angka yang jelas dan jangan perpanjang sewa sebelum evaluasi selesai. Rekomendasi tetap B.
+
+## 👑 Rekomendasi & Rencana Aksi
+**Pilihan B** · keyakinan: **Sedang–Tinggi**.
+| Aksi | PIC | Tenggat | KPI |
+|---|---|---|---|
+| Audit kontribusi & penyebab rugi 12 cabang | CFO + COO | 7 hari | Peta "lokasi vs eksekusi" |
+| Rencana penutupan/penggabungan 5 cabang | COO + CHRO | 30 hari | Mutasi karyawan ≥ 70% |
+| Program perbaikan 7 cabang | COO | 90 hari | Kontribusi positif |
+| Review akhir | CEO | 90 hari | Lanjut / tutup |
+
+**Stop** kalau cabang perbaikan masih negatif 2 bulan berturut-turut setelah program.
+
+## ✅ Yang Perlu Diputuskan CEO
+- Daftar final cabang yang ditutup
+- Paket kompensasi & kebijakan mutasi karyawan
+- Siapa yang menyampaikan ke tim cabang`,
+"Rencana kita ganti 60%":`## 😈 Advokat Setan: Membedah Ide "Ganti 60% Staf Admin dengan AI dalam 6 Bulan"
+
+**1. Target 60% dalam 6 bulan terlalu agresif.** Proses back-office biasanya penuh pengecualian: faktur tidak standar, data vendor berantakan, persetujuan berjenjang. Otomatisasi baru stabil setelah 6–12 bulan perbaikan proses.
+
+**2. Risiko pengetahuan hilang.** Staf admin lama memegang "cara kerja tak tertulis". Kalau mereka keluar sebelum SOP & data rapi, AI akan meniru kekacauan, lebih cepat.
+
+**3. Risiko ketenagakerjaan & reputasi.** Pengurangan besar wajib mengikuti aturan ketenagakerjaan, ada biaya pesangon, dan bisa memukul moral karyawan lain.
+
+**4. Hitungan hemat sering terlalu optimis.** Ada biaya lisensi, integrasi, pengawasan, dan perbaikan error yang sering tidak dihitung di awal.
+
+## 🗣️ Kata Dewan
+**🛰️ Technology Agent:** Mulai dari 3 proses paling repetitif: input faktur, rekonsiliasi bank, laporan rutin. Ukur akurasinya dulu.
+**🤝 HR Agent:** Ubah narasinya dari "ganti orang" jadi "naik kelas": sebagian staf dilatih jadi pengawas otomatisasi & analis.
+**💰 Finance Agent:** Hitung penghematan bersih per proses, bukan per kepala.
+
+## 👑 Cara Menambal Idenya
+| Aksi | PIC | Tenggat | KPI |
+|---|---|---|---|
+| Petakan & rapikan SOP 10 proses admin | COO | 30 hari | SOP lengkap |
+| Pilot otomatisasi 3 proses | CTO | 90 hari | Akurasi ≥ 98% |
+| Program reskilling staf | CHRO | 90 hari | 30% staf tersertifikasi |
+| Target realistis: 30–40% beban kerja berkurang | CEO | 12 bln | Biaya admin −25% |
+
+## ✅ Yang Perlu Diputuskan CEO
+- Target realistis: beban kerja turun, bukan langsung kepala berkurang
+- Kebijakan untuk staf terdampak (reskilling, mutasi, atau kompensasi)`,
+"Naikkan margin kotor":`## 📋 Rencana Aksi: Margin Kotor 18% → 21% dalam 12 Bulan
+
+**Logikanya (perkiraan):** +3 poin margin datang dari 4 sumber: negosiasi pemasok (+1,0), bauran produk & private label (+1,0), menekan susut & barang rusak (+0,6), dan promosi yang lebih tepat sasaran (+0,4). Harga jual tidak dinaikkan secara umum.
+
+| Waktu | Aksi | PIC | KPI |
+|---|---|---|---|
+| **7 hari** | Tarik data margin per kategori, per pemasok, per cabang | CFO | Peta 20% SKU penyumbang margin terendah |
+| **7 hari** | Bentuk tim margin lintas divisi | CEO | Rapat mingguan berjalan |
+| **30 hari** | Negosiasi ulang 20 pemasok terbesar (volume, rabat, termin) | Procurement / COO | Harga beli −2–3% |
+| **30 hari** | Audit susut di 10 cabang tertinggi | COO | Susut turun ke < 1% omzet |
+| **90 hari** | Luncurkan 30–50 SKU private label di kategori cepat laku | CMO + COO | Kontribusi 5% omzet |
+| **90 hari** | Evaluasi promo: hentikan yang tidak menaikkan laba | CMO + CFO | Biaya promo −15% |
+| **90 hari** | Atur ulang planogram: produk margin tinggi di posisi terbaik | COO | Margin kategori +0,5 poin |
+| **6–12 bln** | Pantau dan ulangi siklus tiap kuartal | CFO | Margin 19,5% (Q2) → 21% (Q4) |
+
+## 😈 Advokat Setan
+Private label butuh modal & reputasi. Kalau kualitasnya jelek, pelanggan kabur dan omzet turun. **Tambalannya:** mulai dari kategori sederhana (tisu, sabun, air minum) dan uji di 10 cabang dulu.
+
+## ✅ Yang Perlu Diputuskan CEO
+- Kategori yang boleh masuk private label
+- Batas toleransi kalau pemasok besar menolak negosiasi`
+};
+function fallback(t){
+  const k=Object.keys(DEMO).find(k=>t.includes(k));
+  if(k)return DEMO[k]+`\n\n---\n> Ini contoh jawaban Dewan AI. Untuk mencoba dengan data perusahaan Anda sendiri, hubungi **Pak Ade Wahyudi** di WhatsApp **${WA_TXT}**.`;
+  return `## 👑 Dewan AI · Mode Demo
+Terima kasih, pertanyaannya sudah kami terima: **"${t.replace(/[*_#|]/g,"").slice(0,140)}"**
+
+Di halaman demo ini, Dewan AI menampilkan **jawaban contoh** untuk 4 pertanyaan di bawah. Untuk rapat dewan dengan **pertanyaan dan data perusahaan Anda sendiri**, kami siapkan sesi demo langsung.
+
+**Coba salah satu contoh:**
+- /rapat Buka 15 toko baru di luar Jawa, investasi Rp60 miliar
+- /rapat 12 dari 120 cabang rugi 3 kuartal
+- /bantah Ganti 60% staf admin dengan otomatisasi AI
+- /rencana Naikkan margin kotor 18% → 21%
+
+> Jadwalkan demo langsung: **Pak Ade Wahyudi** · WhatsApp **${WA_TXT}**`;
+}
+
+/* events */
+$("#send").onclick=()=>send();
+$("#inp").addEventListener("keydown",e=>{if(e.key==="Enter"&&!e.shiftKey){e.preventDefault();send()}});
+function autosize(){const t=$("#inp");t.style.height="auto";t.style.height=Math.min(t.scrollHeight,200)+"px"}
+$("#inp").addEventListener("input",autosize);
+document.querySelectorAll(".cmd").forEach(b=>b.onclick=()=>{const t=$("#inp");t.value=b.dataset.c+t.value.replace(/^\/\w+\s?/,"");t.focus();autosize()});
+document.querySelectorAll(".modes button").forEach(b=>b.onclick=()=>{state.mode=b.dataset.m;renderSide();renderTop()});
+$("#wrap").addEventListener("click",e=>{
+  const q=e.target.closest("[data-q]");if(q){send(q.dataset.q);return}
+  const p=e.target.closest("[data-pick]");if(p){state.mode="agent";state.agent=p.dataset.pick;state.on[state.agent]=true;renderSide();renderTop();$("#inp").focus()}
+});
+$("#agents").addEventListener("click",e=>{
+  const t=e.target.closest("[data-tog]");
+  if(t){const id=t.dataset.tog;state.on[id]=!state.on[id];if(!state.on[id]&&state.agent===id&&state.mode==="agent")state.mode="rapat";persist();renderSide();renderTop();toast((state.on[id]?"Diaktifkan: ":"Dinonaktifkan: ")+AGENTS.find(a=>a.id===id).name);return}
+  const r=e.target.closest(".ag");if(r)openAgent(r.dataset.id);
+});
+$("#menuBtn").onclick=()=>$("#side").classList.toggle("open");
+$("#newBtn").onclick=()=>{state.hist=[];renderWelcome();toast("Sesi baru dimulai")};
+document.querySelectorAll("[data-close]").forEach(b=>b.onclick=()=>b.closest(".ov").classList.remove("on"));
+document.querySelectorAll(".ov").forEach(o=>o.addEventListener("click",e=>{if(e.target===o)o.classList.remove("on")}));
+
+$("#cInd").innerHTML=INDUSTRIES.map(i=>`<option>${i}</option>`).join("");
+$("#coBtn").onclick=()=>{$("#cName").value=company.name;$("#cInd").value=company.ind;$("#cScale").value=company.scale;$("#cModel").value=company.model;$("#cTarget").value=company.target;$("#cChal").value=company.chal;$("#cStyle").value=company.style;$("#coOv").classList.add("on");$("#side").classList.remove("open")};
+$("#coSave").onclick=()=>{company={name:$("#cName").value||company.name,ind:$("#cInd").value,scale:$("#cScale").value,model:$("#cModel").value,target:$("#cTarget").value,chal:$("#cChal").value,style:$("#cStyle").value};persist();renderSide();if($("#wrap .hero"))renderWelcome();$("#coOv").classList.remove("on");toast("Profil perusahaan disimpan")};
+
+let editing=null;
+function openAgent(id){const a=AGENTS.find(x=>x.id===id);editing=a;$("#agTitle").textContent=a.ico+" "+a.name;$("#aName").value=a.name;$("#aPos").value=a.pos;$("#aComp").value=a.comp;$("#aResp").value=a.resp||"";$("#aThink").value=a.think;$("#aComm").value=a.comm;$("#aOut").value=a.fmt;$("#agOv").classList.add("on");$("#side").classList.remove("open")}
+function saveAgent(){const a=editing;a.name=$("#aName").value||a.name;a.pos=$("#aPos").value||a.pos;a.comp=$("#aComp").value;a.resp=$("#aResp").value;a.think=$("#aThink").value;a.comm=$("#aComm").value;a.fmt=$("#aOut").value;persist();renderSide();renderTop()}
+$("#agSave").onclick=()=>{saveAgent();$("#agOv").classList.remove("on");toast("Agent disimpan")};
+$("#agAsk").onclick=()=>{saveAgent();state.mode="agent";state.agent=editing.id;state.on[editing.id]=true;$("#agOv").classList.remove("on");renderSide();renderTop();$("#inp").focus()};
+
+renderSide();renderTop();renderWelcome();
+
+/* ===== landing router ===== */
+function route(){const app=location.hash==="#rapat";document.body.classList.toggle("landing",!app);if(app){renderSide();renderTop()}window.scrollTo(0,0)}
+window.addEventListener("hashchange",route);
+document.querySelectorAll("[data-go]").forEach(b=>b.onclick=()=>document.getElementById(b.dataset.go).scrollIntoView({behavior:"smooth"}));
+document.querySelectorAll("[data-try]").forEach(c=>c.onclick=()=>{location.hash="rapat";setTimeout(()=>send(c.dataset.try),250)});
+document.querySelectorAll("[data-bill]").forEach(b=>b.onclick=()=>{document.querySelectorAll("[data-bill]").forEach(x=>x.classList.toggle("on",x===b));document.querySelectorAll(".per").forEach(p=>p.textContent=b.dataset.bill==="t"?"/ tahun":"/ bulan")});
+$("#lnAgents").innerHTML=AGENTS.map(a=>`<div class="card agc rv"><div class="av" style="background:${a.col}">${a.ico}</div><h3>${esc(a.name)}</h3><div class="pos">${esc(a.pos)}</div><p>${esc(a.comp)}</p></div>`).join("");
+const io="IntersectionObserver" in window?new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target);const n=e.target.querySelectorAll("[data-n]");n.forEach(el=>{const t=+el.dataset.n,sm=el.querySelector("small");let i=0;const st=setInterval(()=>{i++;el.firstChild.textContent=Math.round(t*i/30);if(i>=30)clearInterval(st)},30)})}}),{threshold:.15}):null;
+document.querySelectorAll(".rv").forEach(e=>io?io.observe(e):e.classList.add("in"));
+document.querySelectorAll(".wa-l").forEach(a=>a.href=wa());
+sampleP.then(x=>{if(!x){$("#demoNote").innerHTML='Mode demo: menampilkan jawaban contoh. Demo langsung dengan data perusahaan Anda: <a href="'+wa()+'" target="_blank" rel="noopener">WhatsApp Pak Ade Wahyudi '+WA_TXT+'</a>'}}).catch(()=>{});
+route();
+</script>
+</body>
+</html>
