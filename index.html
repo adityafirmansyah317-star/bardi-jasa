@@ -243,13 +243,36 @@ nav a{white-space:nowrap}
 .tstat{display:grid;grid-template-columns:1fr 1fr;gap:12px}.tstat div{background:var(--ink);color:#fff;border-radius:18px;padding:16px}.tstat b{display:block;font-size:26px;font-weight:800}.tstat span{font-size:13px;color:#b9bcc2}
 @media(max-width:960px){.tg{grid-template-columns:1fr 1fr}.tside{grid-column:1/-1}}
 @media(max-width:600px){.tg{grid-template-columns:1fr}.tcard .phone{max-width:300px;margin:auto}}
+.pbar{display:flex;align-items:center;justify-content:center;gap:8px;flex-wrap:wrap;background:var(--red);color:#fff;font-size:13.5px;padding:9px 16px;text-align:center;text-decoration:none;line-height:1.4}
+.pbar u{font-weight:700}.pbar .dot{width:8px;height:8px;border-radius:50%;background:#fff;animation:pl 1.2s infinite}
+@media(max-width:600px){.pbt{display:none}.pbar{font-size:12.5px}}
+@keyframes pl{50%{opacity:.25}}
+.psec{padding:20px 0 70px}
+.pbox{background:linear-gradient(135deg,#d6141f,#a50d16);color:#fff;border-radius:32px;padding:48px;display:grid;grid-template-columns:1.1fr 1fr;gap:40px;position:relative;overflow:hidden;box-shadow:0 30px 70px rgba(200,16,30,.28)}
+.pbox:after{content:"";position:absolute;right:-120px;top:-120px;width:380px;height:380px;border-radius:50%;background:rgba(255,255,255,.07)}
+.ppill{display:inline-block;background:#fff;color:var(--red);font-weight:800;font-size:12.5px;letter-spacing:.06em;padding:7px 13px;border-radius:99px}
+.pbox h2{font-size:clamp(30px,4.2vw,48px);line-height:1.05;letter-spacing:-.03em;margin:18px 0 14px;font-weight:800}.pbox h2 span{color:#ffd9dc;font-weight:700}
+.pbox p{color:#ffe6e8;font-size:16px;max-width:520px}
+.cd{display:flex;gap:10px;margin-top:24px}.cd div{background:rgba(0,0,0,.22);border-radius:16px;padding:12px 0;width:76px;text-align:center}.cd b{display:block;font-size:30px;font-weight:800;font-variant-numeric:tabular-nums}.cd span{font-size:12px;color:#ffd0d4}
+.cdl{display:block;margin-top:8px;color:#ffd0d4;font-size:12.5px}
+.pr{display:grid;gap:10px;align-content:start;position:relative;z-index:1}
+.pitem{display:flex;gap:12px;background:#fff;color:var(--ink);border-radius:18px;padding:14px 16px;font-size:14px;color:#555}.pitem i{font-style:normal;font-size:22px}.pitem b{display:block;color:var(--ink);font-size:15.5px}
+.pbtn{background:#111;color:#fff;justify-content:center;margin-top:6px;padding:16px;font-size:16px}
+.pr small{color:#ffd0d4;font-size:12px}
+.wall{margin-top:40px}.wh{display:flex;justify-content:space-between;align-items:end;gap:10px;flex-wrap:wrap;margin-bottom:14px}.wh b{font-size:20px}.wh span{color:var(--mut);font-size:14px}
+.mq{overflow:hidden;border-radius:20px;mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent)}
+.mqt{display:flex;gap:12px;width:max-content;animation:mq 60s linear infinite}.mq:hover .mqt{animation-play-state:paused}
+.mqt img{height:300px;width:225px;object-fit:cover;border-radius:18px}
+@keyframes mq{to{transform:translateX(-50%)}}
+@media(max-width:860px){.pbox{grid-template-columns:1fr;padding:30px 22px;border-radius:26px;gap:26px}.cd div{width:64px}.mqt img{height:230px;width:172px}}
 </style>
 </head>
 <body>
+<a class="pbar wa" data-msg="Halo Mas Aditiya, saya mau klaim promo motor Honda bulan ini. Promonya apa saja?"><span class="dot"></span><b>PROMO <span class="pmon"></span></b> <span class="pbt">DP ringan, cicilan bersahabat, bonus dari dealer.</span> Berakhir <b class="pleft"></b> · <u>Klaim sekarang →</u></a>
 
 <div class="nav"><div class="in">
   <a href="#" class="me"><img class="avi" src="img/aditiya.jpg" alt="Aditiya"><span><b>Aditiya</b><small>Honda Amarta Cirebon</small></span></a>
-  <nav><a href="#kenapa">Kenapa Saya</a><a href="#bukti">Serah Terima</a><a href="#testimoni">Testimoni</a><a href="#video">Promo</a><a href="#motor">Pilihan Motor</a><a href="#cicilan">Hitung Cicilan</a><a href="#faq">FAQ</a></nav>
+  <nav><a href="#kenapa">Kenapa Saya</a><a href="#bukti">Serah Terima</a><a href="#testimoni">Testimoni</a><a href="#promo">Promo</a><a href="#motor">Pilihan Motor</a><a href="#cicilan">Hitung Cicilan</a><a href="#faq">FAQ</a></nav>
   <a class="btn btn-r wa" data-msg="Halo Mas Aditiya, saya mau konsultasi beli motor Honda."><svg class="wa-ic" viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2z"/></svg><span>Konsultasi Gratis</span></a>
 </div></div>
 
@@ -267,7 +290,7 @@ nav a{white-space:nowrap}
   </div>
   <div class="card-me rv">
     <div class="top"><div><b>Aditiya</b><small>Salesman · Honda Amarta Cirebon</small><br><span class="badge-v">✓ Sales resmi Dealer Amarta Cirebon</span></div></div>
-    <div class="pho"><img src="img/aditiya.jpg" alt="Aditiya, salesman Honda Amarta Cirebon"><span class="ptag">🏍️ 2+ tahun di Honda Amarta</span></div>
+    <div class="pho"><img src="img/aditiya.jpg" alt="Aditiya, salesman Honda Amarta Cirebon"><span class="ppill">🏍️ 2+ tahun di Honda Amarta</span></div>
     <div class="chat">
       <div class="bub l">Mas, gaji saya UMR, bisa kredit motor nggak ya? 🙏</div>
       <div class="bub r">Bisa banget! Kita hitung dulu cicilan yang aman buat gaji kamu, nanti saya bantu pilih tipe dan DP-nya 👍</div>
@@ -310,6 +333,29 @@ nav a{white-space:nowrap}
         <div><b>🛡️ Dealer resmi</b>Motor baru, surat lengkap, dan garansi resmi pabrik.</div>
       </div>
       <a class="btn btn-r wa" data-msg="Halo Mas Aditiya, saya sudah lihat testimoninya. Saya mau konsultasi beli motor Honda." style="margin-top:18px">Mau dilayani seperti ini →</a>
+    </div>
+  </div>
+  <div class="wall rv"><div class="wh"><b>Konsumen yang sudah percaya</b><span>Foto asli serah terima unit bersama konsumen saya</span></div>
+    <div class="mq"><div class="mqt"><img src="img/st1.jpg" alt="Konsumen serah terima motor Honda" loading="lazy"><img src="img/st2.jpg" alt="Konsumen serah terima motor Honda" loading="lazy"><img src="img/st3.jpg" alt="Konsumen serah terima motor Honda" loading="lazy"><img src="img/st4.jpg" alt="Konsumen serah terima motor Honda" loading="lazy"><img src="img/st5.jpg" alt="Konsumen serah terima motor Honda" loading="lazy"><img src="img/st6.jpg" alt="Konsumen serah terima motor Honda" loading="lazy"><img src="img/st7.jpg" alt="Konsumen serah terima motor Honda" loading="lazy"><img src="img/st8.jpg" alt="Konsumen serah terima motor Honda" loading="lazy"><img src="img/st9.jpg" alt="Konsumen serah terima motor Honda" loading="lazy"><img src="img/st10.jpg" alt="Konsumen serah terima motor Honda" loading="lazy"><img src="img/st11.jpg" alt="Konsumen serah terima motor Honda" loading="lazy"><img src="img/st12.jpg" alt="Konsumen serah terima motor Honda" loading="lazy"><img src="img/st1.jpg" alt="Konsumen serah terima motor Honda" loading="lazy"><img src="img/st2.jpg" alt="Konsumen serah terima motor Honda" loading="lazy"><img src="img/st3.jpg" alt="Konsumen serah terima motor Honda" loading="lazy"><img src="img/st4.jpg" alt="Konsumen serah terima motor Honda" loading="lazy"><img src="img/st5.jpg" alt="Konsumen serah terima motor Honda" loading="lazy"><img src="img/st6.jpg" alt="Konsumen serah terima motor Honda" loading="lazy"><img src="img/st7.jpg" alt="Konsumen serah terima motor Honda" loading="lazy"><img src="img/st8.jpg" alt="Konsumen serah terima motor Honda" loading="lazy"><img src="img/st9.jpg" alt="Konsumen serah terima motor Honda" loading="lazy"><img src="img/st10.jpg" alt="Konsumen serah terima motor Honda" loading="lazy"><img src="img/st11.jpg" alt="Konsumen serah terima motor Honda" loading="lazy"><img src="img/st12.jpg" alt="Konsumen serah terima motor Honda" loading="lazy"></div></div>
+  </div>
+</div></section>
+
+<section class="psec" id="promo"><div class="in">
+  <div class="pbox">
+    <div class="pl">
+      <span class="ppill">🔥 PROMO <span class="pmon"></span> · TERBATAS</span>
+      <h2>Mau motor baru bulan ini?<br><span>Jangan sampai kehabisan promonya.</span></h2>
+      <p>Promo dari dealer berganti setiap bulan dan kuotanya terbatas. Chat saya sekarang, saya kirim promo yang berlaku hari ini plus hitungan DP dan cicilan yang pas untuk kamu.</p>
+      <div class="cd"><div><b class="cd-d">0</b><span>hari</span></div><div><b class="cd-h">0</b><span>jam</span></div><div><b class="cd-m">0</b><span>menit</span></div><div><b class="cd-s">0</b><span>detik</span></div></div>
+      <small class="cdl">Sisa waktu promo bulan ini</small>
+    </div>
+    <div class="pr">
+      <div class="pitem"><i>💸</i><div><b>DP ringan</b>Pilihan DP rendah sesuai program leasing yang berlaku.</div></div>
+      <div class="pitem"><i>📉</i><div><b>Cicilan bersahabat</b>Saya bandingkan beberapa leasing biar cicilanmu paling pas.</div></div>
+      <div class="pitem"><i>🎁</i><div><b>Bonus & potongan</b>Hadiah langsung atau potongan harga dari program dealer bulan ini.</div></div>
+      <div class="pitem"><i>🚚</i><div><b>Diantar sampai rumah</b>Tinggal terima motornya, surat-surat saya urus.</div></div>
+      <a class="btn pbtn wa" data-msg="Halo Mas Aditiya, saya mau klaim promo motor Honda bulan ini. Motor yang saya incar: ___">Klaim promo via WhatsApp →</a>
+      <small>*Promo mengikuti program resmi dealer yang berlaku saat transaksi.</small>
     </div>
   </div>
 </div></section>
@@ -461,6 +507,14 @@ document.querySelectorAll(".chk").forEach(g=>{const up=()=>{const a=g.querySelec
 document.querySelectorAll(".wa").forEach(a=>{a.href=wa(a.dataset.msg);a.target="_blank";a.rel="noopener"});
 const io="IntersectionObserver" in window?new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add("shown");io.unobserve(e.target)}}),{threshold:.1}):null;
 document.querySelectorAll(".rv").forEach(e=>io?io.observe(e):e.classList.add("shown"));
+
+(function(){const B=["JANUARI","FEBRUARI","MARET","APRIL","MEI","JUNI","JULI","AGUSTUS","SEPTEMBER","OKTOBER","NOVEMBER","DESEMBER"];
+const n=new Date();document.querySelectorAll(".pmon").forEach(e=>e.textContent=B[n.getMonth()]);
+const end=new Date(n.getFullYear(),n.getMonth()+1,1,0,0,0);
+const q=c=>document.querySelector(c);
+function t(){let d=Math.max(0,end-new Date());const D=Math.floor(d/864e5),H=Math.floor(d/36e5)%24,M=Math.floor(d/6e4)%60,S=Math.floor(d/1e3)%60;
+q(".cd-d").textContent=D;q(".cd-h").textContent=String(H).padStart(2,"0");q(".cd-m").textContent=String(M).padStart(2,"0");q(".cd-s").textContent=String(S).padStart(2,"0");
+q(".pleft").textContent=D>0?D+" hari lagi":"hari ini"}t();setInterval(t,1000)})();
 </script>
 </body>
 </html>
